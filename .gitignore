@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+vendor/
+.venv/
+venv/
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Common Lisp
+*.fasl
+.ace/.verify-cache/
+.vscode/alive/
+
+# ACE loop telemetry (append-only metrics, regenerated per run)
+.ace/feedback/loop-metrics.jsonl
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Secrets (never commit!)
+*.pem
+*.key
+credentials.json
+secrets.yaml

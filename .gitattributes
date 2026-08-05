@@ -1,0 +1,20 @@
+# Normalizacion de fin de linea.
+#
+# Este repositorio se trabaja en Windows, donde git suele tener
+# core.autocrlf=true. Sin estas reglas, los scripts de shell se registrarian
+# con CRLF y al clonarlos fallarian con "bad interpreter" porque el shebang
+# quedaria como "#!/bin/bash\r". El gate de verificacion y los hooks de ACE
+# dependen de esos scripts, asi que se fuerzan a LF explicitamente.
+
+* text=auto
+
+# Deben ser LF siempre, en el repositorio y en el arbol de trabajo
+*.sh   text eol=lf
+*.lisp text eol=lf
+*.asd  text eol=lf
+
+# Binarios: sin conversion
+*.fasl binary
+*.png  binary
+*.jpg  binary
+*.pdf  binary
