@@ -7,6 +7,17 @@
 - **Mode:** PLANNING
 - **Próxima transición:** PLANNING → EXECUTION (requiere aprobación del equipo)
 
+## Estado del repositorio
+
+- **Rama:** `main`
+- **Remoto:** `https://github.com/Wardaddy118/Expert_System_Lisp.git`
+- **Commit base del diseño:** `9df7cf3` — *add ACE framework and architecture
+  design for the expert system* (101 archivos, publicado en `origin/main`)
+- **Código de implementación:** ninguno todavía. Es correcto: el rol Architect
+  no lo escribe.
+- **Gate de verificación:** en rojo a propósito, porque no hay fuentes Lisp.
+  Pasa a verde con T001.
+
 ## Objetivo actual
 
 Diseñar la arquitectura y producir la documentación del Sistema Experto de
@@ -30,6 +41,9 @@ Recomendaciones Académicas antes de escribir código de implementación.
 - Plan de implementación con cinco fases y diez criterios de aceptación.
 - Cola de tareas T001–T014 en `docs/progress/tasks.json`, validada contra el
   schema y los invariantes del loop.
+- Línea base publicada en `origin/main`. Incluye `.gitattributes` que fuerza
+  LF en los `.sh`: sin eso, al clonar en Windows los scripts del gate y de los
+  hooks salían con CRLF y fallaban con «bad interpreter».
 
 ### En progreso
 
@@ -45,11 +59,16 @@ Recomendaciones Académicas antes de escribir código de implementación.
 ## Próximos pasos
 
 1. [ ] El equipo revisa y aprueba `docs/planning/implementation_plan.md`.
-2. [ ] Confirmar carrera, universidad y fechas; completar el cronograma.
-3. [ ] Reapuntar `verify.test_cmd` en `.aceconfig` a `asdf:test-system`
-       cuando T001 cierre (hoy el gate solo compila).
+       Al aprobarlo, cambiar su `Status` de `Draft` a `Approved`.
+2. [ ] Confirmar carrera, universidad y fechas; completar el cronograma
+       (`docs/planning/implementation_plan.md` §Cronograma).
+3. [ ] Repartir T001–T014 entre el equipo. T001 y T002 son independientes y
+       pueden arrancar en paralelo.
 4. [ ] Transición a EXECUTION: **iniciar una sesión nueva de LLM**
        (context flush) cargando únicamente T001 y el plan de implementación.
+5. [ ] Al cerrar T001, reapuntar `verify.test_cmd` en `.aceconfig` a
+       `asdf:test-system` para que el gate verifique comportamiento y no solo
+       compilación.
 
 ## Restricciones activas
 

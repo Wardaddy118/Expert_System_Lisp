@@ -5,6 +5,7 @@
 > **Autor:** Architect (rol ACE)
 > **PRD:** `docs/requirements/PRD-recomendador-academico.md`
 > **Cola de tareas:** `docs/progress/tasks.json`
+> **Línea base:** commit `9df7cf3` en `origin/main`
 
 ---
 
@@ -132,7 +133,7 @@ para la entrega.
 
 | Semana | Fase | Entregable | Fecha |
 | ------ | ---- | ---------- | ----- |
-| Actual | Diseño | Documentación de arquitectura completa (esta entrega) | 2026-08-05 |
+| Actual | Diseño | ✅ Documentación de arquitectura completa, publicada en `origin/main` (`9df7cf3`) | 2026-08-05 |
 | — | Borrador | Documentación + esqueleto de código + motor mínimo | *por confirmar* |
 | 11 | 1 y 2 | Motor de inferencia funcional y probado | *por confirmar* |
 | 12 | 3 | Base de conocimiento completa, recomendaciones correctas | *por confirmar* |
@@ -153,6 +154,27 @@ al terminar la Fase 1 y parte de la Fase 2 se cubre:
 - **Proceso:** el gate `verify.sh` en verde y la cola `tasks.json` mostrando
   qué está hecho y qué falta. Esto último distingue el trabajo de un montón de
   archivos sueltos.
+
+---
+
+## Estado actual del repositorio
+
+| Elemento | Estado |
+| -------- | ------ |
+| Documentación de diseño | Completa y publicada (`9df7cf3`) |
+| Código de implementación | **Ninguno.** Correcto: el Architect no lo escribe |
+| Cola de tareas | 14 pendientes, T001 elegible |
+| Gate de verificación | En rojo: no hay fuentes Lisp que verificar. Pasa a verde con T001 |
+
+El gate en rojo no es un defecto. `.ace/scripts/verify-lisp.sh` falla
+deliberadamente cuando no encuentra fuentes, porque un gate que aprueba el
+silencio no es un gate. La primera vez que pase será con código real.
+
+Estado de la cola, en cualquier momento:
+
+```bash
+npx -y -p create-ace-framework@2.7.0 ace-framework loop --dry-run
+```
 
 ---
 
