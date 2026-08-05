@@ -234,7 +234,7 @@ omisión (ADR-005).
 | La captura del catálogo (40–60 cursos) se pospone y bloquea las pruebas | Media | Alto | T002 va en paralelo al motor; es trabajo de datos, no de código |
 | Las reglas terminan cableadas en Lisp por presión de tiempo | Media | Alto | Prueba de extensibilidad (NFR-004): agregar una regla sin tocar el motor |
 | Bucle infinito en el motor por reglas que se reactivan | Media | Medio | Refracción: un mismo binding no vuelve a disparar la misma regla |
-| Estadísticas dejadas para el final y entregadas a medias | Media | Medio | T007/T008 con fecha propia, no como "si sobra tiempo" |
+| Estadísticas dejadas para el final y entregadas a medias | Media | Medio | T010/T011 con tarea y semana propias, no como "si sobra tiempo" |
 | Sobrecarga documental del framework ACE vs. tiempo de código | Baja | Medio | La documentación pesada ya está hecha en esta fase |
 
 ---
@@ -257,11 +257,26 @@ calendario académico están **pendientes de confirmar**.
 
 ## Preguntas abiertas
 
-- [ ] ¿Qué carrera y universidad se modelan exactamente? (define `data/courses.lisp`)
+Bloquean el arranque de la Fase 2:
+
+- [ ] ¿Qué carrera y universidad se modelan exactamente? (define `data/courses.lisp`, bloquea T002)
 - [ ] ¿Cuáles son las fechas del calendario para el borrador y la semana 15?
-- [ ] ¿El profesor exige un formato específico de informe además del código?
 - [ ] ¿Cuántas personas hay en el equipo y cómo se reparten las tareas de `tasks.json`?
-- [ ] ¿El horario se modela por bloques (día + franja) o por sesiones con hora exacta?
+- [ ] ¿El profesor exige un formato específico de informe además del código?
+
+Requieren ratificación del equipo (hay un valor propuesto, pero es criterio
+experto y alguien tiene que hacerse responsable de él):
+
+- [ ] Los pesos de priorización BR-010 a BR-015 (`.ace/knowledge/business-rules.md`)
+- [ ] El umbral de cuello de botella: 3 cursos dependientes (BR-006)
+- [ ] La excepción de BR-005: ¿se recomienda un cuello de botella que excede la
+      tolerancia a dificultad por un nivel?
+- [ ] Con qué criterio se asigna la dificultad 1–5 de cada curso, y quién lo hace
+
+Ya resueltas, no reabrir sin ADR:
+
+- ~~¿Horario por bloques o por hora exacta?~~ → bloques discretos `(día franja)`,
+  decidido en ADR-006.
 
 ---
 
