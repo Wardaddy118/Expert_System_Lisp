@@ -87,6 +87,37 @@
 - **Nota de diseño:** Esta regla opera sobre el conjunto ya priorizado, no
   sobre cursos individuales. Se aplica después de la quiescencia del motor.
 
+### BR-032: Límite de una electiva por bloque
+
+- **Categoría:** Dura
+- **Añadida:** 2026-08-05, al incorporar el catálogo real de 47 cursos del
+  Bachillerato en Ingeniería en Sistemas de Computación (Fidélitas), que
+  organiza 12 opciones electivas en tres bloques (`sixth-term-elective`,
+  `seventh-term-elective`, `eighth-term-elective`) de los que el estudiante
+  cursa solo una por bloque. Numerada fuera de secuencia respecto a su
+  ubicación en este documento porque se agregó después de BR-001 a BR-031;
+  se coloca aquí, junto a BR-004, por ser la misma clase de restricción.
+- **Descripción:** De los cursos `recommended` que pertenecen a un mismo
+  `elective-group`, no se puede recomendar más de uno.
+- **Justificación:** Es una restricción real de matrícula: el plan de
+  estudios exige elegir una sola materia por bloque electivo. Mostrar dos
+  o más de un mismo bloque como recomendadas simultáneamente sería
+  información engañosa, no una recomendación real.
+- **Aplicación:** Igual que BR-004, opera sobre el conjunto ya priorizado
+  y corre después de la quiescencia del motor (`apply-elective-group-limit`
+  en `src/domain/knowledge.lisp`), no como `defrule`: comparar "cuál del
+  grupo se queda" es una agregación sobre un conjunto de tamaño variable,
+  la misma razón técnica que BR-004. De los cursos `recommended` de un
+  bloque, se conserva el de mayor puntaje; el resto se marca
+  `(excluded <id> elective-group-limit)`. Corre **antes** que BR-004, para
+  no gastar presupuesto de créditos en una electiva que de todas formas se
+  descartaría por venir del mismo bloque que otra mejor puntuada.
+- **Excepciones:** Ninguna.
+- **Nota:** Los tres grupos válidos y el tamaño esperado de cada uno (4
+  opciones) se validan al cargar el catálogo, no en esta regla — ver
+  `src/domain/loader.lisp` (`validate-elective-consistency`,
+  `validate-elective-group-sizes`).
+
 ---
 
 ## Reglas de filtrado (estándar)
