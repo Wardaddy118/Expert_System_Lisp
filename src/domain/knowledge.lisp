@@ -304,11 +304,16 @@
   (third (find course-id (engine:query-facts wm 'elective) :key #'second :test #'equal)))
 
 (defun apply-elective-group-limit (wm)
-  "De los cursos RECOMMENDED que comparten un mismo :elective-group, deja
-   solo el de mayor puntaje y afirma (excluded id elective-group-limit)
-   para el resto. Se corre antes que APPLY-CREDIT-LIMIT para no gastar
-   presupuesto de creditos en una electiva que de todas formas se
-   descartaria por venir del mismo bloque que otra mejor puntuada."
+  "Implementa BR-008. De los cursos RECOMMENDED que comparten un mismo
+   :elective-group, deja solo el de mayor puntaje y afirma
+   (excluded id elective-group-limit) para el resto. Se corre antes que
+   APPLY-CREDIT-LIMIT para no gastar presupuesto de creditos en una electiva
+   que de todas formas se descartaria por venir del mismo bloque que otra
+   mejor puntuada.
+
+   Es post-procesamiento y no una DEFRULE por la misma razon que BR-004:
+   comparar entre si un conjunto de tamano variable no se expresa con
+   condiciones de aridad fija."
   (let* ((recommended-ids (recommended-course-ids wm))
          (groups (remove-duplicates
                   (remove nil (mapcar (lambda (id) (course-elective-group wm id)) recommended-ids)))))

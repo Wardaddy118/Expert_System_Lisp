@@ -172,15 +172,17 @@
       "id": "T011",
       "name": "Estadisticas del catalogo",
       "objective": "domain/stats calcula ademas metricas agregadas del catalogo: cursos mas recomendados sobre el conjunto de perfiles de ejemplo, cursos cuello de botella con el numero de cursos que desbloquean, dificultad promedio por area y cobertura de reglas indicando cuales nunca dispararon.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
-        "modify": ["src/domain/stats.lisp", "tests/domain/stats.lisp"]
+        "modify": ["src/domain/stats.lisp", "tests/domain/stats-tests.lisp"],
+        "create": ["tests/cli/format-tests.lisp"]
       },
       "depends_on": ["T010"],
       "complexity": "M",
-      "attempts": 0,
-      "notes": "Pendiente, sin empezar. La cobertura de reglas es diagnostico util: una regla que nunca dispara es conocimiento muerto o datos que no la ejercitan. Estado 2026-08-05: no hay estadisticas a nivel de catalogo (cursos mas recomendados entre perfiles, cuello de botella con n, dificultad promedio por area, cobertura de reglas)."
+      "attempts": 1,
+      "result_file": "docs/progress/task_T011_result.md",
+      "notes": "Las cuatro metricas implementadas y visibles en run.lisp. La cobertura de reglas rindio de inmediato: 3 de 25 reglas nunca disparan (bottleneck-exception-to-tolerance, priority-general-education, recommended-via-general-education); hay que decidir si sobran o si los datos no las ejercitan. De paso se corrigieron dos defectos: la suite pasaba mientras run.lisp reventaba (ninguna prueba renderizaba el informe) y tres lineas excedian las 80 columnas de FR-050. Suite: 182 -> 235 comprobaciones."
     },
     {
       "id": "T012",
@@ -204,7 +206,7 @@
     {
       "id": "T013",
       "name": "Perfiles de demostracion",
-      "objective": "data/profiles contiene al menos cuatro perfiles de ejemplo que ejercitan casos distintos: estudiante de primer ingreso sin aprobados, estudiante avanzado, estudiante con horario muy restringido y estudiante con tolerancia a dificultad baja. Cada perfil se puede cargar desde la CLI para la demostracion.",
+      "objective": "data/profiles contiene al menos cuatro perfiles de ejemplo que ejercitan casos distintos: estudiante de primer ingreso sin aprobados, estudiante avanzado, estudiante con horario muy restringido y estudiante con tolerancia a dificultad baja. Cada perfil se puede cargar desde la CLI. Ademas, en conjunto los perfiles deben hacer disparar las tres reglas que hoy nunca disparan (bottleneck-exception-to-tolerance, priority-general-education, recommended-via-general-education): el estudiante avanzado cubre las dos de general-education y el de tolerancia baja debe cubrir la excepcion de cuello de botella.",
       "status": "pending",
       "role": "Developer",
       "files": {
@@ -213,7 +215,7 @@
       "depends_on": ["T012"],
       "complexity": "S",
       "attempts": 0,
-      "notes": "Pendiente. Estado 2026-08-05: solo existe un perfil, data/profiles/sample-profile.lisp, ajustado para ejercitar las 6 razones de descarte en una sola corrida. Faltan los otros tres casos (primer ingreso sin aprobados, horario muy restringido, tolerancia baja)."
+      "notes": "Pendiente. Estado 2026-08-05: solo existe un perfil, data/profiles/sample-profile.lisp, ajustado para ejercitar las 6 razones de descarte en una sola corrida. Faltan los otros tres casos (primer ingreso sin aprobados, horario muy restringido, tolerancia baja). CRITERIO DE CIERRE (decision D-09, PROJECT_CONTEXT.md): si al terminar esta tarea alguna de las tres reglas que hoy nunca disparan sigue sin dispararse con NINGUN perfil, esa regla se ELIMINA de knowledge.lisp y su BR se marca como retirada. Una regla que no se activa ni con perfiles disenados a proposito para activarla es conocimiento muerto. Verificar con la cobertura de reglas de catalog-statistics."
     },
     {
       "id": "T014",

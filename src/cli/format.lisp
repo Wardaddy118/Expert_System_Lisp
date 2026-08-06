@@ -14,6 +14,7 @@
   (print-recommendations (domain:session-recommendations session) stream)
   (print-excluded (domain:session-excluded session) stream)
   (print-statistics (domain:statistics session) stream)
+  (print-catalog-statistics (domain:catalog-statistics session) stream)
   (print-trace (domain:session-working-memory session) stream)
   (values))
 
@@ -21,8 +22,8 @@
   (format stream "~%PERFIL ANALIZADO~%~%")
   (format stream "- Cursos aprobados: ~a~%" (join-or-none (domain:profile-approved wm)))
   (format stream "- Intereses: ~a~%" (join-or-none (domain:profile-interests wm)))
-  (format stream "- Horarios disponibles: ~a~%"
-          (join-or-none (mapcar #'format-schedule-block (domain:profile-available wm))))
+  (print-wrapped stream "- Horarios disponibles: "
+                 (join-or-none (mapcar #'format-schedule-block (domain:profile-available wm))))
   (format stream "- Tolerancia de dificultad: ~a~%" (domain:profile-difficulty-tolerance wm))
   (format stream "- Area profesional objetivo: ~a~%" (stringify (domain:profile-target-area wm))))
 
@@ -55,8 +56,8 @@
   (if (null excluded)
       (format stream "Ningun curso fue descartado.~%")
       (dolist (e excluded)
-        (format stream "- ~a~%  Motivo: ~a~%"
-                (domain:excluded-course-name e) (describe-reason (domain:excluded-reason e)))))
+        (format stream "- ~a~%" (domain:excluded-course-name e))
+        (print-wrapped stream "  Motivo: " (describe-reason (domain:excluded-reason e)))))
   (format stream "~%"))
 
 (defun print-statistics (stats stream)
@@ -70,6 +71,47 @@
   (format stream "- Dificultad promedio: ~,2f~%" (float (domain:stats-average-difficulty stats)))
   (format stream "- Creditos recomendados: ~a~%" (domain:stats-recommended-credits stats)))
 
+(defun print-catalog-statistics (stats stream)
+  "Metricas del catalogo y de la base de conocimiento (FR-041), a diferencia
+   de PRINT-STATISTICS que describe al estudiante."
+  (let ((profiles (domain:catalog-stats-profiles-analyzed stats)))
+    (format stream "~%ESTADISTICAS DEL CATALOGO~%~%")
+    (format stream "- Perfiles analizados: ~a~%" profiles)
+    (when (= profiles 1)
+      (print-wrapped stream "  " "Con un solo perfil, 'mas recomendados' aun no compara nada: la metrica cobra sentido con varios perfiles."))
+
+    (format stream "~%  Cursos mas recomendados:~%")
+    (print-top-rows (domain:catalog-stats-most-recommended stats) 5 "perfil(es)" stream)
+
+    (format stream "~%  Cursos cuello de botella (cuantos cursos desbloquean):~%")
+    (print-top-rows (domain:catalog-stats-bottlenecks stats) 5 "curso(s)" stream)
+
+    (format stream "~%  Dificultad promedio por area:~%")
+    (dolist (row (domain:catalog-stats-difficulty-by-area stats))
+      (format stream "    ~20a ~,2f  (~a curso(s))~%"
+              (string-downcase (symbol-name (first row)))
+              (float (second row))
+              (third row)))
+
+    (format stream "~%  Cobertura de reglas: ~a de ~a dispararon~%"
+            (domain:catalog-stats-rules-fired stats)
+            (domain:catalog-stats-rules-total stats))
+    (let ((never (domain:catalog-stats-rules-never-fired stats)))
+      (if never
+          (progn
+            (format stream "    Nunca dispararon (conocimiento muerto o datos que no lo ejercitan):~%")
+            (dolist (name never)
+              (format stream "      - ~a~%" (string-downcase (symbol-name name)))))
+          (format stream "    Todas las reglas dispararon al menos una vez.~%")))))
+
+(defun print-top-rows (rows limit unit stream)
+  "Imprime las primeras LIMIT filas (id nombre n), o un aviso si no hay."
+  (if (null rows)
+      (format stream "    (ninguno)~%")
+      (dolist (row (subseq rows 0 (min limit (length rows))))
+        (format stream "    ~10a ~32a ~a ~a~%"
+                (first row) (second row) (third row) unit))))
+
 (defun print-trace (wm stream)
   (format stream "~%TRAZA DEL MOTOR~%~%")
   (dolist (entry (engine:trace-entries wm))
@@ -80,6 +122,38 @@
       (format stream "  Hecho generado: ~a~%" (format-fact fact)))))
 
 ;;; --- Utilidades de formato ------------------------------------------------
+
+(defun print-wrapped (stream prefix text &key (width 80))
+  "Imprime PREFIX seguido de TEXT cortando en espacios para no pasar WIDTH
+   columnas. Las lineas de continuacion se sangran hasta la altura de PREFIX.
+
+   El PRD pide que el informe se lea en una terminal de 80 columnas (FR-050);
+   sin esto, una lista larga de horarios o un motivo de descarte extenso se
+   desbordan. Hay una prueba que lo verifica sobre el informe completo."
+  (let* ((indent (make-string (length prefix) :initial-element #\Space))
+         (limit (- width (length prefix)))
+         (line "")
+         (first-line-p t))
+    (flet ((emit ()
+             (format stream "~a~a~%" (if first-line-p prefix indent) line)
+             (setf first-line-p nil
+                   line "")))
+      (dolist (word (split-on-spaces text))
+        (cond ((string= line "") (setf line word))
+              ((<= (+ (length line) 1 (length word)) limit)
+               (setf line (concatenate 'string line " " word)))
+              (t (emit)
+                 (setf line word))))
+      (when (or (string/= line "") first-line-p)
+        (emit)))))
+
+(defun split-on-spaces (text)
+  (loop with start = 0
+        for pos = (position #\Space text :start start)
+        for word = (subseq text start (or pos (length text)))
+        unless (string= word "") collect word
+        while pos
+        do (setf start (1+ pos))))
 
 (defun join-or-none (items)
   (if items

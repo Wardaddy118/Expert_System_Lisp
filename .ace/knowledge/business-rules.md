@@ -134,6 +134,9 @@
 - **Excepciones:** Un curso cuello de botella (BR-006) que exceda la
   tolerancia **por un solo nivel** sí se recomienda, marcado como advertencia
   en la explicación. Atrasarlo cuesta más que llevarlo.
+  **Ratificada el 2026-08-05 (decisión D-08).** Con los datos actuales esta
+  excepción nunca se activa; la regla `bottleneck-exception-to-tolerance` está
+  sujeta al criterio de cierre de D-09 (T013 debe ejercitarla o se elimina).
 - **Ejemplo:**
 
   ```text
@@ -146,8 +149,10 @@
 
 ## Reglas de priorización (blandas)
 
-Los pesos son heurísticos y ajustables. Los valores iniciales están abajo; si
-se cambian, se actualiza esta tabla en el mismo commit.
+Los pesos son heurísticos. **Ratificados el 2026-08-05 (decisión D-06)**: ya no
+son provisionales y cambiarlos exige un ADR, no una edición suelta. La
+justificación de cada peso está en
+[PROJECT_CONTEXT.md §D-06](../../docs/context/PROJECT_CONTEXT.md#d-06--por-qué-estos-pesos).
 
 | Regla | Condición | Puntos |
 | ----- | --------- | ------ |
@@ -168,7 +173,10 @@ se cambian, se actualiza esta tabla en el mismo commit.
   un estudiante rara vez ve esto por su cuenta.
 - **Aplicación:** Regla que cuenta los `prerequisite` que apuntan al curso y
   afirma `(bottleneck <id> <n>)` cuando `n ≥ 3`.
-- **Excepciones:** El umbral 3 es ajustable; se documenta aquí si cambia.
+- **Excepciones:** Ninguna. **Umbral ratificado en 3 el 2026-08-05 (decisión
+  D-07).** Con los prerrequisitos provisionales actuales solo un curso lo
+  alcanza; bajarlo a 2 para que aparezcan más sería ajustar la regla a los
+  datos en vez de al concepto. Cambiarlo exige un ADR.
 
 ### BR-007: De elegible a recomendado
 
@@ -182,6 +190,37 @@ se cambian, se actualiza esta tabla en el mismo commit.
   los elegibles de mayor prioridad de todas formas, con una nota explícita de
   que no hubo coincidencia de intereses. Es preferible a devolver una lista
   vacía.
+
+### BR-008: Una sola electiva por bloque
+
+- **Categoría:** Dura
+- **Descripción:** De los cursos `recommended` que comparten el mismo
+  `elective-group`, solo se conserva el de mayor prioridad acumulada. El resto
+  se marca `(excluded <id> elective-group-limit)`.
+- **Justificación:** El plan de estudios ofrece cada bloque electivo como un
+  menú de opciones del que el estudiante escoge **una**. Recomendar dos
+  electivas del mismo bloque propone algo que la matrícula no permite, igual
+  que recomendar un curso sin sus requisitos.
+- **Aplicación:** `apply-elective-group-limit` en `src/domain/knowledge.lisp`.
+  Es **post-procesamiento después de la quiescencia**, no una `defrule`, por
+  la misma razón que BR-004: comparar entre sí un conjunto de tamaño variable
+  no se expresa con condiciones de aridad fija.
+- **Orden:** corre **antes** que `apply-credit-limit` (BR-004), para no gastar
+  presupuesto de créditos en una electiva que igual se descartaría por venir
+  del mismo bloque que otra mejor puntuada.
+- **Excepciones:** Ninguna.
+- **Ejemplo:**
+
+  ```text
+  Válido:   bloque 3 con SC-801 (prioridad 18) y SC-802 (prioridad 12)
+            → se recomienda SC-801; SC-802 queda excluded, elective-group-limit
+  Inválido: recomendar SC-801 y SC-802 juntos: el estudiante solo lleva una
+  ```
+
+> **Nota de trazabilidad:** esta regla se implementó durante la sesión de
+> implementación (commit `19c680a`) y funcionaba antes de estar especificada
+> aquí. Se documenta ahora para cerrar esa deuda. El orden correcto es el
+> inverso: primero el BR, después la implementación.
 
 ---
 
