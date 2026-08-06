@@ -19,9 +19,21 @@ sbcl --script run-tests.lisp  # corre la suite de pruebas (182 comprobaciones)
 Si cualquiera de los dos scripts falla, **no continuar**: hay una regresión
 que resolver antes de seguir con cualquier otra tarea.
 
+## Fechas de entrega (confirmadas 2026-08-06)
+
+| Entrega | Fecha | Semana |
+| ------- | ----- | ------ |
+| **Borrador** | **jueves 2026-08-06** | 13 |
+| **Final: sistema 100% funcional** | **jueves 2026-08-20** | 15 |
+
+Quedan T012, T013 y T014 para la entrega final: dos semanas, con el motor, el
+dominio y las estadísticas ya verificados. El informe en **formato IEEE** lo
+exige el profesor y se cree que alguien del equipo lo está redactando —
+**confirmar**; si nadie lo tiene, el contenido ya existe en `docs/`.
+
 ## Estado del repositorio
 
-- **Rama:** `feature/initial-lisp-implementation` (no fusionada a `main`)
+- **Rama:** `feature/initial-lisp-implementation`, fusionada a `main`
 - **Código de implementación:** existe y funciona. Ya no es correcto decir
   "el Architect no lo escribe": la fase de diseño cerró y esta rama contiene
   la primera versión funcional completa.

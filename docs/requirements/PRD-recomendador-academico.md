@@ -257,13 +257,19 @@ calendario académico están **pendientes de confirmar**.
 
 ## Preguntas abiertas
 
-Quedan **dos**, y ninguna se puede decidir internamente: dependen de hechos
-externos al equipo.
+Ninguna bloquea el código. Queda **una sola**, y es de coordinación interna:
 
-- [ ] ¿Cuáles son las fechas del calendario para el borrador y la semana 15?
-- [ ] ¿El profesor exige un formato específico de informe además del código?
+- [ ] **El informe en formato IEEE.** El profesor lo exige. Se cree que alguien
+      del equipo ya lo está redactando, pero **no está confirmado**, y el
+      borrador se entrega el 2026-08-06. Hay que confirmarlo con el equipo hoy
+      mismo: si nadie lo tiene, el contenido ya existe en `docs/` (PRD, ADR-004
+      a ADR-006, plan de implementación, resultados de tareas) y es trabajo de
+      reorganizar, no de escribir de cero.
 
-Ambas se resuelven con un mensaje al profesor. Ninguna bloquea el código.
+Resuelta el 2026-08-06:
+
+- ~~¿Fechas del calendario?~~ → Borrador **jueves 6 de agosto de 2026**
+  (semana 13); entrega final **jueves 20 de agosto de 2026** (semana 15).
 
 ### Ya resueltas — no reabrir sin ADR
 

@@ -134,18 +134,37 @@ para la entrega.
 
 ## Cronograma
 
-> **Las fechas están pendientes de confirmar.** El equipo debe completar la
-> columna de fechas con el calendario del curso antes de arrancar la Fase 2.
+Fechas confirmadas por el equipo el 2026-08-06. **Estamos en la semana 13**, no
+en la 11: el proyecto va adelantado respecto al plan original, porque las fases
+1 a 3 y buena parte de la 4 se completaron en una sola sesión de
+implementación.
 
-| Semana | Fase | Entregable | Fecha |
-| ------ | ---- | ---------- | ----- |
-| Actual | Diseño | ✅ Documentación de arquitectura completa, publicada en `origin/main` (`9df7cf3`) | 2026-08-05 |
-| — | Borrador | Documentación + esqueleto de código + motor mínimo | *por confirmar* |
-| 11 | 1 y 2 | Motor de inferencia funcional y probado | *por confirmar* |
-| 12 | 3 | Base de conocimiento completa, recomendaciones correctas | *por confirmar* |
-| 13 | 3 | Explicaciones funcionando | *por confirmar* |
-| 14 | 4 | Estadísticas y CLI completa | *por confirmar* |
-| 15 | 5 | Sistema 100% funcional, documentado y demostrable | *por confirmar* |
+| Semana | Fecha | Entregable | Estado |
+| ------ | ----- | ---------- | ------ |
+| 13 | 2026-08-05 | Documentación de arquitectura completa | ✅ Hecho |
+| 13 | 2026-08-05 | Motor de inferencia funcional y probado (Fases 1 y 2) | ✅ Hecho |
+| 13 | 2026-08-05 | Base de conocimiento y recomendaciones correctas (Fase 3) | ✅ Hecho |
+| 13 | 2026-08-05 | Explicaciones desde la traza | ✅ Hecho |
+| 13 | 2026-08-06 | Estadísticas de estudiante y de catálogo (T010, T011) | ✅ Hecho |
+| **13** | **2026-08-06 (jueves)** | **ENTREGA DEL BORRADOR** | ⏳ Hoy |
+| 14 | 2026-08-13 | CLI interactiva (T012) y perfiles de demostración (T013) | ⬜ Pendiente |
+| **15** | **2026-08-20 (jueves)** | **ENTREGA FINAL: sistema 100% funcional** (T014) | ⬜ Pendiente |
+
+> La fecha de la semana 15 se interpretó como el jueves 20 de agosto, dos
+> semanas después del borrador. Si el profesor se refería al jueves 13,
+> corregir aquí y comprimir la semana 14.
+
+### Qué queda para la entrega final
+
+Dos semanas para tres tareas, con el sistema ya funcionando de punta a punta:
+
+- **T012** captura interactiva del perfil. Hoy la sesión carga un perfil fijo.
+- **T013** perfiles de demostración, con el criterio de cierre de la decisión
+  D-09 (ejercitar las tres reglas que nunca disparan, o eliminarlas).
+- **T014** suite de aceptación formalizada.
+
+Nada de esto es riesgo de cronograma: el motor, el dominio y las estadísticas
+—que era lo difícil— ya están verificados.
 
 ### Qué mostrar en el borrador
 
