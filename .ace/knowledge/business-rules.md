@@ -134,6 +134,9 @@
 - **Excepciones:** Un curso cuello de botella (BR-006) que exceda la
   tolerancia **por un solo nivel** sí se recomienda, marcado como advertencia
   en la explicación. Atrasarlo cuesta más que llevarlo.
+  **Ratificada el 2026-08-05 (decisión D-08).** Con los datos actuales esta
+  excepción nunca se activa; la regla `bottleneck-exception-to-tolerance` está
+  sujeta al criterio de cierre de D-09 (T013 debe ejercitarla o se elimina).
 - **Ejemplo:**
 
   ```text
@@ -146,8 +149,10 @@
 
 ## Reglas de priorización (blandas)
 
-Los pesos son heurísticos y ajustables. Los valores iniciales están abajo; si
-se cambian, se actualiza esta tabla en el mismo commit.
+Los pesos son heurísticos. **Ratificados el 2026-08-05 (decisión D-06)**: ya no
+son provisionales y cambiarlos exige un ADR, no una edición suelta. La
+justificación de cada peso está en
+[PROJECT_CONTEXT.md §D-06](../../docs/context/PROJECT_CONTEXT.md#d-06--por-qué-estos-pesos).
 
 | Regla | Condición | Puntos |
 | ----- | --------- | ------ |
@@ -168,7 +173,10 @@ se cambian, se actualiza esta tabla en el mismo commit.
   un estudiante rara vez ve esto por su cuenta.
 - **Aplicación:** Regla que cuenta los `prerequisite` que apuntan al curso y
   afirma `(bottleneck <id> <n>)` cuando `n ≥ 3`.
-- **Excepciones:** El umbral 3 es ajustable; se documenta aquí si cambia.
+- **Excepciones:** Ninguna. **Umbral ratificado en 3 el 2026-08-05 (decisión
+  D-07).** Con los prerrequisitos provisionales actuales solo un curso lo
+  alcanza; bajarlo a 2 para que aparezcan más sería ajustar la regla a los
+  datos en vez de al concepto. Cambiarlo exige un ADR.
 
 ### BR-007: De elegible a recomendado
 

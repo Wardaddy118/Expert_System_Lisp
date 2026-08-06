@@ -257,26 +257,30 @@ calendario académico están **pendientes de confirmar**.
 
 ## Preguntas abiertas
 
-Bloquean el arranque de la Fase 2:
+Quedan **dos**, y ninguna se puede decidir internamente: dependen de hechos
+externos al equipo.
 
-- [ ] ¿Qué carrera y universidad se modelan exactamente? (define `data/courses.lisp`, bloquea T002)
 - [ ] ¿Cuáles son las fechas del calendario para el borrador y la semana 15?
-- [ ] ¿Cuántas personas hay en el equipo y cómo se reparten las tareas de `tasks.json`?
 - [ ] ¿El profesor exige un formato específico de informe además del código?
 
-Requieren ratificación del equipo (hay un valor propuesto, pero es criterio
-experto y alguien tiene que hacerse responsable de él):
+Ambas se resuelven con un mensaje al profesor. Ninguna bloquea el código.
 
-- [ ] Los pesos de priorización BR-010 a BR-015 (`.ace/knowledge/business-rules.md`)
-- [ ] El umbral de cuello de botella: 3 cursos dependientes (BR-006)
-- [ ] La excepción de BR-005: ¿se recomienda un cuello de botella que excede la
-      tolerancia a dificultad por un nivel?
-- [ ] Con qué criterio se asigna la dificultad 1–5 de cada curso, y quién lo hace
+### Ya resueltas — no reabrir sin ADR
 
-Ya resueltas, no reabrir sin ADR:
+| Pregunta | Resolución |
+| -------- | ---------- |
+| ¿Horario por bloques o por hora exacta? | Bloques discretos `(día franja)` — ADR-006 |
+| ¿Qué carrera y universidad? | Bachillerato en Ing. en Sistemas de Computación, Universidad Fidélitas — 47 cursos en `data/courses.lisp` |
+| ¿Con qué criterio se asigna la dificultad 1–5? | Fórmula cuatrimestre + laboratorio, tope 5 — decisión D-05 |
+| ¿Los pesos de priorización BR-010 a BR-015? | Ratificados como están — decisión D-06 |
+| ¿El umbral de cuello de botella (3)? | Se mantiene en 3 — decisión D-07 |
+| ¿La excepción de BR-005? | Se mantiene — decisión D-08 |
+| ¿Qué hacer con las reglas que nunca disparan? | Se conservan; T013 debe ejercitarlas o se eliminan — decisión D-09 |
+| ¿Se espera a los datos oficiales? | No: se entrega con los provisionales, etiquetados — decisión D-10 |
+| ¿Cómo se reparten las tareas? | Quedan 3 (T012–T014) y están en curso; el equipo aporta datos oficiales si los consigue |
 
-- ~~¿Horario por bloques o por hora exacta?~~ → bloques discretos `(día franja)`,
-  decidido en ADR-006.
+El detalle y la justificación de D-05 a D-10 están en
+[PROJECT_CONTEXT.md](../context/PROJECT_CONTEXT.md#decisiones-de-criterio-experto-ratificadas-2026-08-05).
 
 ---
 

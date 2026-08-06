@@ -24,6 +24,87 @@ funciones y mensajes de commit en inglés.
 
 ---
 
+## Decisiones de criterio experto (ratificadas 2026-08-05)
+
+Estas seis estaban marcadas como "pendientes de ratificar": había un valor
+propuesto, pero nadie se había hecho responsable de él. **Ya están decididas.**
+Cambiarlas ahora exige un ADR.
+
+| # | Decisión | Qué se decidió |
+| - | -------- | -------------- |
+| D-05 | Criterio de dificultad | Se ratifica la fórmula: cuatrimestre (1–2 → 2, 3–5 → 3, 6–8 → 4) más 1 si el curso tiene laboratorio, con tope 5 |
+| D-06 | Pesos de priorización | Se ratifican los de BR-010 a BR-015 tal como están |
+| D-07 | Umbral de cuello de botella | Se mantiene en 3 cursos dependientes |
+| D-08 | Excepción de BR-005 | Se mantiene: un cuello de botella que excede la tolerancia por un nivel se recomienda con advertencia |
+| D-09 | Reglas que nunca disparan | Se conservan las tres, con criterio de cierre (abajo) |
+| D-10 | Datos oficiales faltantes | Se entrega con los provisionales, etiquetados como tales |
+
+### D-05 — Por qué esta fórmula de dificultad
+
+Es **reproducible y auditable**: se deriva de dos datos que sí son oficiales
+—el cuatrimestre del curso y si tiene laboratorio— con una regla que cualquiera
+puede recalcular. La alternativa real no era una medición, era que cada quien
+pusiera un número a ojo, y eso no se puede defender ante nadie.
+
+Supone que los cuatrimestres avanzados y los cursos con laboratorio exigen más.
+Es una hipótesis del equipo, no un dato medido, y se presenta siempre así:
+**heurística del equipo, nunca clasificación de la Universidad Fidélitas.**
+
+### D-06 — Por qué estos pesos
+
+- El **área objetivo (+10)** pesa más que un **interés suelto (+5)** porque es
+  la decisión de carrera, no una preferencia puntual.
+- El **cuello de botella (+8)** pesa casi tanto como el área objetivo porque
+  atrasarlo tiene costo estructural: bloquea el avance completo.
+- **Desbloquear un curso del área objetivo (+4)** es un efecto de segundo
+  orden, y por eso vale menos que serlo directamente.
+- **−2 por estar muy por debajo de la tolerancia** evita llenar la lista de
+  cursos triviales que no aportan a la carga del semestre.
+
+Producen separación real, no empates: en la demo actual el primer recomendado
+saca 27 y el segundo 15.
+
+### D-07 — Por qué el umbral se queda en 3
+
+Con los prerrequisitos provisionales actuales, solo SC-304 llega a 3 y podría
+tentar bajarlo a 2 para "que salgan más". Eso sería **ajustar la regla a los
+datos**, que es exactamente al revés de como debe hacerse. El umbral responde a
+qué significa ser cuello de botella, no a cuántos queremos ver hoy.
+
+### D-09 — Criterio de cierre para las reglas que no disparan
+
+Hoy tres de las 25 reglas nunca disparan:
+`bottleneck-exception-to-tolerance`, `priority-general-education` y
+`recommended-via-general-education`. Las tres **se conservan por ahora**,
+porque la hipótesis es que el problema son los datos y no las reglas.
+
+**T013 debe crear los perfiles que las ejerciten.** Y este es el criterio de
+cierre, que no admite interpretación:
+
+> Si al terminar T013 alguna regla sigue sin disparar, **se elimina.** Una
+> regla que no se puede activar ni con perfiles diseñados a propósito para
+> activarla es conocimiento muerto, y conocimiento muerto en la base es peor
+> que no tenerlo: infla el conteo y no se puede defender.
+
+### D-10 — Se entrega con datos provisionales, etiquetados
+
+No hay créditos, prerrequisitos ni horarios oficiales, y no depende de nosotros
+conseguirlos a tiempo. La decisión es **no bloquear la entrega esperándolos**:
+
+- ADR-006 separa datos de código, así que si los datos oficiales llegan es un
+  cambio en `data/` y **cero líneas de código**. No hay deuda técnica en
+  esperar.
+- Todo campo provisional está marcado curso por curso en `data/courses.lisp` y
+  resumido en `ACTIVE_CONTEXT.md`. Se presenta como heurística del equipo.
+- Lo que **no** se hace: presentar un dato provisional como oficial, ni omitir
+  la distinción para que el sistema se vea más completo.
+
+La consecuencia honesta hay que decirla en la defensa: los cuellos de botella
+que reporta el sistema son **correctos dado el grafo cargado**, y ese grafo es
+de ejemplo. El razonamiento es real; los datos de entrada, parciales.
+
+---
+
 ## Implicaciones que se derivan de lo anterior
 
 ### D-01 → El motor es el entregable central
