@@ -23,6 +23,13 @@ build/
 *.swo
 *~
 
+# Configuracion local de Claude Code (hooks de ACE).
+# Se ignora porque es configuracion de herramienta por maquina, no del
+# proyecto: la ruta a sh.exe que usan los hooks es especifica de Windows.
+# Nada se pierde -- se reinstala desde la plantilla, que si esta versionada:
+#   .ace/adapters/claude-code/settings-template.json
+.claude/
+
 # OS
 .DS_Store
 Thumbs.db
