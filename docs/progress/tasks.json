@@ -2,7 +2,7 @@
   "version": "1.0",
   "plan_ref": "docs/planning/implementation_plan.md",
   "created": "2026-08-05T12:00:00Z",
-  "updated": "2026-08-05T12:00:00Z",
+  "updated": "2026-08-05T21:00:00Z",
   "defaults": {
     "max_attempts": 3,
     "runner": "manual",
@@ -13,7 +13,7 @@
       "id": "T001",
       "name": "Esqueleto ASDF del sistema",
       "objective": "expert-system.asd define los sistemas expert-system y expert-system/tests; src/package.lisp declara los paquetes engine, domain y cli; (asdf:load-system :expert-system) carga sin error y (asdf:test-system :expert-system/tests) corre una suite FiveAM vacia que pasa.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
         "create": [
@@ -24,68 +24,75 @@
       },
       "depends_on": [],
       "complexity": "S",
-      "attempts": 0,
-      "notes": "Al cerrar esta tarea hay que reapuntar verify.test_cmd en .aceconfig a 'sbcl --non-interactive --eval (asdf:test-system :expert-system/tests)' para que el gate verifique comportamiento y no solo compilacion."
+      "attempts": 1,
+      "result_file": "docs/progress/task_T001_result.md",
+      "notes": "Verificado con run-tests.lisp (182 comprobaciones, 0 fallos), no con tests/suite.lisp: la suite real vive en tests/package.lisp + tests/test-runner.lisp. RESUELTO 2026-08-05: el gate ya no compila archivo por archivo (eso fallaba con todo codigo real por los in-package); ahora verify-lisp.sh delega en ASDF y corre la suite, y run-tests.lisp usa ql:quickload para que FiveAM se descargue en un clon limpio."
     },
     {
       "id": "T002",
       "name": "Catalogo de cursos en data/",
       "objective": "data/courses.lisp contiene entre 40 y 60 cursos de la carrera acordada, cada uno con nombre, creditos, area del vocabulario cerrado, dificultad 1-5, lista de requisitos y bloques de horario, en el formato de property list definido en ADR-006. Se documenta en el mismo archivo que se simplifico respecto al plan real.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
         "create": ["data/courses.lisp"]
       },
       "depends_on": [],
       "complexity": "M",
-      "attempts": 0,
-      "notes": "Trabajo de datos, no de codigo. Puede ir en paralelo con T001 y con toda la fase 2. Bloquea la validacion de T007."
+      "attempts": 2,
+      "result_file": "docs/progress/task_T002_result.md",
+      "notes": "47 cursos reales (Bachillerato en Ingenieria en Sistemas de Computacion, Fidelitas), dentro del rango 40-60. Nombre, cuatrimestre, laboratorio y curso colegiado son oficiales; creditos, area, dificultad, requisitos y horario son provisionales y estan marcados como tales curso por curso. D-03 solo cumplida parcialmente: faltan requisitos oficiales."
     },
     {
       "id": "T003",
       "name": "Hechos y memoria de trabajo",
       "objective": "El paquete engine expone la memoria de trabajo: crear, afirmar un hecho con identificador de insercion monotono, consultar presencia de un hecho y listar hechos por relacion. Las pruebas usan hechos inventados sin ningun simbolo del dominio academico.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
         "create": ["src/engine/facts.lisp", "tests/engine/facts.lisp"]
       },
       "depends_on": ["T001"],
       "complexity": "S",
-      "attempts": 0
+      "attempts": 1,
+      "result_file": "docs/progress/task_T003_result.md",
+      "notes": "Archivo de pruebas real: tests/engine/facts-tests.lisp (no facts.lisp)."
     },
     {
       "id": "T004",
       "name": "Pattern matching con variables",
       "objective": "engine unifica un patron contra un hecho produciendo bindings o fallo: variables prefijadas con ?, ligadura en la primera aparicion y coincidencia consistente despues, soporte de constantes string y simbolo. La suite cubre variable repetida, fallo por aridad distinta, patron sin variables y binding vacio.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
         "create": ["src/engine/matching.lisp", "tests/engine/matching.lisp"]
       },
       "depends_on": ["T003"],
       "complexity": "L",
-      "attempts": 0,
-      "notes": "Riesgo principal del proyecto segun el PRD. No empezar T005 hasta que la suite de matching este completa y verde."
+      "attempts": 1,
+      "result_file": "docs/progress/task_T004_result.md",
+      "notes": "Riesgo principal del proyecto segun el PRD: se cumplio, no bloqueo el cronograma. Ademas de las variables, se agregaron 6 pruebas estructurales genericas (distinct, precedes, at-most, at-least, exceeds-by-one, at-least-below) para expresar reglas que necesitan comparar sin usar funciones Lisp arbitrarias."
     },
     {
       "id": "T005",
       "name": "Reglas como datos: macro defrule",
       "objective": "La macro defrule registra una regla con nombre, prioridad, condiciones :when (incluyendo condiciones negadas con not) y acciones :then, guardandola como estructura inspeccionable sin ejecutar codigo. Una prueba verifica que una regla recien definida se puede leer y examinar campo por campo.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
         "create": ["src/engine/rules.lisp", "tests/engine/rules.lisp"]
       },
       "depends_on": ["T004"],
       "complexity": "M",
-      "attempts": 0
+      "attempts": 1,
+      "result_file": "docs/progress/task_T005_result.md",
+      "notes": "El docstring de DEFRULE termino siendo opcional (no obligatorio como se penso originalmente): las reglas del dominio si lo traen citando su BR, pero exigirlo en todos los casos rompia las pruebas del motor con hechos inventados."
     },
     {
       "id": "T006",
       "name": "Agenda, resolucion de conflictos y ciclo de inferencia",
       "objective": "engine ejecuta el ciclo match-select-act hasta quiescencia: construye el conjunto de conflicto, ordena por prioridad y luego recencia y luego orden de declaracion, aplica refraccion para no repetir una instanciacion, dispara afirmando los hechos del :then y registra cada disparo en la traza con regla, bindings, hechos activadores y hechos producidos.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
         "create": [
@@ -97,61 +104,69 @@
       },
       "depends_on": ["T005"],
       "complexity": "L",
-      "attempts": 0,
-      "notes": "Debe incluir la prueba de terminacion: una regla cuya conclusion reactiva su propia condicion tiene que alcanzar quiescencia, no colgarse. Y la prueba de determinismo: traza identica en corridas repetidas."
+      "attempts": 1,
+      "result_file": "docs/progress/task_T006_result.md",
+      "notes": "Incluye la prueba de terminacion y la de determinismo, ambas verdes. max-cycles por omision quedo en 1000; la demostracion actual usa ~295."
     },
     {
       "id": "T007",
       "name": "Carga y validacion del catalogo",
       "objective": "domain/loader lee data/courses.lisp y lo normaliza a hechos planos de la capa de catalogo segun entities.md, y aborta con una condicion propia si detecta identificadores duplicados, requisitos que apuntan a cursos inexistentes o ciclos en el grafo de requisitos. Las pruebas cubren los tres errores de datos con catalogos de prueba pequenos.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
         "create": ["src/domain/loader.lisp", "tests/domain/loader.lisp"]
       },
       "depends_on": ["T006", "T002"],
       "complexity": "M",
-      "attempts": 0
+      "attempts": 2,
+      "result_file": "docs/progress/task_T007_result.md",
+      "notes": "Ampliado sobre el alcance original al incorporar el catalogo de 47 cursos: valida tambien cuatrimestre presente, consistencia de electiva/grupo-electivo y tamano de cada bloque electivo."
     },
     {
       "id": "T008",
       "name": "Reglas academicas del dominio",
       "objective": "domain/knowledge declara con defrule las reglas BR-001 a BR-015 documentadas en .ace/knowledge/business-rules.md, cada una citando su BR en el docstring. Cada regla tiene una prueba de disparo y una de no-disparo, y ninguna requiere modificar el motor.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
         "create": ["src/domain/knowledge.lisp", "tests/domain/knowledge.lisp"]
       },
       "depends_on": ["T007"],
       "complexity": "L",
-      "attempts": 0,
-      "notes": "Aqui se verifica el invariante duro: ninguna recomendacion puede violar requisitos ni horario."
+      "attempts": 2,
+      "result_file": "docs/progress/task_T008_result.md",
+      "notes": "25 defrule, cubriendo BR-001 a BR-021 (mas de lo previsto). Se agrego apply-elective-group-limit esta sesion: post-procesamiento de dominio, no defrule, sin BR formal todavia -- ver docs/context/ACTIVE_CONTEXT.md, seccion Decisiones pendientes."
     },
     {
       "id": "T009",
       "name": "Reconstruccion de explicaciones",
       "objective": "domain/explain recorre la traza hacia atras desde un hecho recommended y devuelve la cadena de reglas que lo produjeron con los hechos que activaron cada una. Una prueba verifica BR-020: sobre todos los perfiles de ejemplo, ninguna recomendacion tiene explicacion vacia.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
         "create": ["src/domain/explain.lisp", "tests/domain/explain.lisp"]
       },
       "depends_on": ["T008"],
       "complexity": "M",
-      "attempts": 0
+      "attempts": 1,
+      "result_file": "docs/progress/task_T009_result.md",
+      "notes": "Solo existe un perfil de ejemplo hoy (T013 sigue pendiente), asi que BR-020 se verifica sobre ese unico perfil, no sobre varios."
     },
     {
       "id": "T010",
       "name": "Estadisticas del estudiante",
       "objective": "domain/stats calcula sobre la memoria de trabajo final el avance de carrera relativo al catalogo modelado, creditos aprobados contra totales, distribucion de aprobados por area y carga estimada del semestre propuesto. La salida indica explicitamente que el avance es relativo al catalogo, no al plan completo.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
         "create": ["src/domain/stats.lisp", "tests/domain/stats.lisp"]
       },
       "depends_on": ["T008"],
       "complexity": "M",
-      "attempts": 0
+      "attempts": 1,
+      "result_file": "docs/progress/task_T010_result.md",
+      "notes": "Implementado con un conjunto de metricas distinto al literal del objetivo original (evaluados/aprobados/bloqueados/incompatibles/dificiles/elegibles/dificultad promedio/creditos recomendados, no avance-de-carrera/distribucion-por-area). Cubre el mismo requisito funcional (FR-040) desde otro angulo; ver docs/progress/task_T010_result.md para el detalle."
     },
     {
       "id": "T011",
@@ -165,7 +180,7 @@
       "depends_on": ["T010"],
       "complexity": "M",
       "attempts": 0,
-      "notes": "La cobertura de reglas es diagnostico util: una regla que nunca dispara es conocimiento muerto o datos que no la ejercitan."
+      "notes": "Pendiente, sin empezar. La cobertura de reglas es diagnostico util: una regla que nunca dispara es conocimiento muerto o datos que no la ejercitan. Estado 2026-08-05: no hay estadisticas a nivel de catalogo (cursos mas recomendados entre perfiles, cuello de botella con n, dificultad promedio por area, cobertura de reglas)."
     },
     {
       "id": "T012",
@@ -184,7 +199,7 @@
       "depends_on": ["T009", "T011"],
       "complexity": "L",
       "attempts": 0,
-      "notes": "main.lisp es el unico archivo donde se permiten simbolos SB-*. La logica de sesion debe ser probable sin E/S real."
+      "notes": "main.lisp es el unico archivo donde se permiten simbolos SB-*. La logica de sesion debe ser probable sin E/S real. Estado 2026-08-05: src/cli/session.lisp y src/cli/format.lisp existen y funcionan, pero cargan un perfil FIJO (data/profiles/sample-profile.lisp), no capturan por consola. No marcar esta tarea como verificada hasta que exista captura interactiva real -- es la primera prioridad alta de la proxima sesion."
     },
     {
       "id": "T013",
@@ -197,7 +212,8 @@
       },
       "depends_on": ["T012"],
       "complexity": "S",
-      "attempts": 0
+      "attempts": 0,
+      "notes": "Pendiente. Estado 2026-08-05: solo existe un perfil, data/profiles/sample-profile.lisp, ajustado para ejercitar las 6 razones de descarte en una sola corrida. Faltan los otros tres casos (primer ingreso sin aprobados, horario muy restringido, tolerancia baja)."
     },
     {
       "id": "T014",
@@ -211,7 +227,7 @@
       "depends_on": ["T013"],
       "complexity": "M",
       "attempts": 0,
-      "notes": "La prueba de extensibilidad NFR-004 es la que demuestra que las reglas no quedaron cableadas. Si falla, se violo ADR-005."
+      "notes": "La prueba de extensibilidad NFR-004 es la que demuestra que las reglas no quedaron cableadas. Si falla, se violo ADR-005. Estado 2026-08-05: no existe tests/acceptance.lisp como archivo dedicado, pero los 10 criterios estan cubiertos de forma dispersa por la suite real (182 comprobaciones en tests/engine/ y tests/domain/), incluida la prueba de extensibilidad. Formalizarlos en un solo archivo de aceptacion sigue pendiente."
     }
   ]
 }

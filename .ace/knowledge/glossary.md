@@ -161,16 +161,44 @@ actualizar este archivo en el mismo commit.
 
 ### Áreas profesionales
 
+**Importante:** esta clasificación es una inferencia del equipo a partir
+del nombre de cada curso, **no** es una clasificación oficial de la
+Universidad Fidélitas — el programa suministrado no declara área
+profesional por curso. Ver `docs/context/ACTIVE_CONTEXT.md`.
+
+| Símbolo | Significado | En uso en `data/courses.lisp` (2026-08-05) |
+| ------- | ----------- | :---: |
+| `software-engineering` | Ingeniería de software y desarrollo | ✅ |
+| `mathematics` | Matemática general del plan | ✅ |
+| `general-education` | Cursos de formación general y humanidades | ✅ |
+| `databases` | Bases de datos | ✅ (agregado 2026-08-05) |
+| `networks` | Redes y comunicaciones | ✅ (agregado 2026-08-05) |
+| `cybersecurity` | Seguridad informática | ✅ (agregado 2026-08-05) |
+| `data` | Datos, inteligencia de negocios, big data | ✅ (agregado 2026-08-05) |
+| `infrastructure` | Sistemas operativos, servidores, electrónica | ✅ (agregado 2026-08-05) |
+| `management` | Administración, gestión de proyectos, gobernanza | ✅ (agregado 2026-08-05) |
+| `algorithms` | Algoritmos y estructuras de datos | ⬜ sin uso en el catálogo actual |
+| `systems` | Sistemas operativos, redes y arquitectura | ⬜ sin uso en el catálogo actual |
+| `data-science` | Datos, estadística y aprendizaje automático | ⬜ sin uso en el catálogo actual |
+| `theory` | Fundamentos teóricos y matemática discreta | ⬜ sin uso en el catálogo actual |
+| `security` | Seguridad informática | ⬜ sin uso; reemplazado por `cybersecurity` en el catálogo actual, se conserva por si un catálogo futuro lo necesita |
+
+Las últimas cinco filas vienen del catálogo de demostración de 10 cursos de
+la versión anterior (ya reemplazado por el catálogo real de 47). Se
+conservan aquí para no borrar vocabulario ya definido; un catálogo futuro
+puede volver a usarlas.
+
+### Bloques electivos
+
+Vocabulario cerrado para `elective-group` (`.ace/knowledge/entities.md`).
+Dato oficial en cuanto a que el programa sí organiza las electivas en
+estos tres bloques; los nombres simbólicos son una convención del equipo.
+
 | Símbolo | Significado |
 | ------- | ----------- |
-| `algorithms` | Algoritmos y estructuras de datos |
-| `software-engineering` | Ingeniería de software y desarrollo |
-| `systems` | Sistemas operativos, redes y arquitectura |
-| `data-science` | Datos, estadística y aprendizaje automático |
-| `theory` | Fundamentos teóricos y matemática discreta |
-| `mathematics` | Matemática general del plan |
-| `security` | Seguridad informática |
-| `general-education` | Cursos de formación general y humanidades |
+| `sixth-term-elective` | Bloque electivo del sexto cuatrimestre (4 opciones) |
+| `seventh-term-elective` | Bloque electivo del sétimo cuatrimestre (4 opciones) |
+| `eighth-term-elective` | Bloque electivo del octavo cuatrimestre (4 opciones) |
 
 ### Días
 

@@ -1,11 +1,15 @@
 # Plan de Implementación: Sistema Experto de Recomendaciones Académicas
 
-> **Status:** Draft — pendiente de aprobación del equipo
+> **Status:** En ejecución — Fases 1 a 3 y parte de la Fase 4 verificadas
 > **Creado:** 2026-08-05
-> **Autor:** Architect (rol ACE)
+> **Última actualización:** 2026-08-05 (implementación de la primera
+> versión funcional en `feature/initial-lisp-implementation`)
+> **Autor:** Architect (rol ACE); implementación por rol Developer
 > **PRD:** `docs/requirements/PRD-recomendador-academico.md`
-> **Cola de tareas:** `docs/progress/tasks.json`
+> **Cola de tareas:** `docs/progress/tasks.json` (10 de 14 verificadas)
 > **Línea base:** commit `9df7cf3` en `origin/main`
+> **Estado detallado y decisiones tomadas durante la implementación:**
+> `docs/context/ACTIVE_CONTEXT.md`
 
 ---
 
@@ -29,7 +33,9 @@ tener matching confiable es la forma más común de arruinar este proyecto.
 - [x] Vocabulario y modelo de datos definidos (`.ace/knowledge/`)
 - [x] Estándar de código Lisp definido (`.ace/standards/lisp.md`)
 - [x] Gate de verificación operativo (`.ace/scripts/verify.sh`)
-- [ ] Carrera y universidad a modelar confirmadas
+- [x] Carrera y universidad a modelar confirmadas: Bachillerato en
+      Ingeniería en Sistemas de Computación, Universidad Fidélitas
+      (catálogo real de 47 cursos en `data/courses.lisp`)
 - [ ] Fechas del calendario académico confirmadas
 - [ ] Reparto de tareas entre el equipo
 
@@ -162,19 +168,27 @@ al terminar la Fase 1 y parte de la Fase 2 se cubre:
 | Elemento | Estado |
 | -------- | ------ |
 | Documentación de diseño | Completa y publicada (`9df7cf3`) |
-| Código de implementación | **Ninguno.** Correcto: el Architect no lo escribe |
-| Cola de tareas | 14 pendientes, T001 elegible |
-| Gate de verificación | En rojo: no hay fuentes Lisp que verificar. Pasa a verde con T001 |
+| Código de implementación | Primera versión funcional, rama `feature/initial-lisp-implementation` |
+| Cola de tareas | 10 de 14 verificadas (T001–T010); T011–T014 pendientes |
+| Gate de verificación | En verde: compila el sistema con ASDF y corre la suite completa |
+| Suite de pruebas | 182 comprobaciones, 0 fallos (`sbcl --script run-tests.lisp`) |
+| Catálogo de datos | 47 cursos reales (Fidélitas); ver `docs/context/ACTIVE_CONTEXT.md` para qué campos son oficiales y cuáles provisionales |
 
-El gate en rojo no es un defecto. `.ace/scripts/verify-lisp.sh` falla
-deliberadamente cuando no encuentra fuentes, porque un gate que aprueba el
-silencio no es un gate. La primera vez que pase será con código real.
+El gate compila con éxito desde que existe código real (Fase 1). Sigue
+pendiente reapuntar `verify.test_cmd` en `.aceconfig` de
+`sh .ace/scripts/verify-lisp.sh` a `asdf:test-system :expert-system/tests`,
+para que verifique comportamiento (la suite de 182 pruebas) y no solo
+compilación — ver la nota de T001 en `docs/progress/tasks.json`.
 
 Estado de la cola, en cualquier momento:
 
 ```bash
 npx -y -p create-ace-framework@2.7.0 ace-framework loop --dry-run
 ```
+
+Para el detalle sesión a sesión — qué es oficial, qué es provisional en los
+datos, y la próxima tarea recomendada — ver `docs/context/ACTIVE_CONTEXT.md`,
+que es la fuente de verdad volátil; este documento es el plan estable.
 
 ---
 
@@ -203,6 +217,13 @@ terminada hasta que el gate imprime `VERIFY_RESULT=pass`.
 | 8 | Catálogo entre 40 y 60 cursos | Prueba sobre `data/courses.lisp` |
 | 9 | Ambas familias de estadísticas presentes | Pruebas de `stats.lisp` |
 | 10 | Sesión completa en menos de 2 s | Medición en la demostración |
+
+**Estado 2026-08-05:** 1–8 verificados por la suite actual (182 pruebas,
+`sbcl --script run-tests.lisp`). El criterio 9 solo parcialmente: existen
+estadísticas del estudiante (T010), no del catálogo (T011, pendiente). El
+criterio 10 no se ha medido formalmente; la demostración con 47 cursos y 25
+reglas corre en menos de un segundo en desarrollo, pero no hay una prueba
+que lo verifique.
 
 ---
 

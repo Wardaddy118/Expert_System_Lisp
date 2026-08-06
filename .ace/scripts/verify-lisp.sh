@@ -1,86 +1,68 @@
 #!/bin/bash
 #
-# verify-lisp.sh - Common Lisp gate for this project.
+# verify-lisp.sh - Gate de verificacion Common Lisp de este proyecto.
 #
-# Wired into .aceconfig as `verify: test_cmd:` and therefore executed by
-# .ace/scripts/verify.sh. It must exit non-zero on any failure, and it must
-# also exit non-zero when there is nothing to verify: an empty gate that
-# reports success is the exact failure mode the Harness Engineering Standard
-# forbids.
+# Lo invoca .ace/scripts/verify.sh a traves de verify.test_cmd en .aceconfig.
+# Debe salir distinto de cero ante cualquier fallo, y tambien cuando no hay
+# nada que verificar: un gate vacio que reporta exito es exactamente el modo
+# de fallo que prohibe el estandar de Harness Engineering.
 #
-# What it does today: compile-checks every project Lisp source with SBCL.
-# When this project grows an ASDF system with a test system, add the
-# `asdf:test-system` call at the bottom (see TODO) so the gate verifies
-# behaviour, not just compilability.
+# POR QUE ESTE GATE DELEGA EN ASDF
+#
+# La primera version compilaba cada archivo .lisp por separado, en un proceso
+# SBCL nuevo por archivo. Eso solo funciona con archivos que definen su propio
+# paquete. En codigo real todo archivo empieza con
+# (in-package :expert-system.engine), y ese paquete se define en
+# src/package.lisp, que no esta cargado en un proceso nuevo. Resultado: fallaba
+# TODO el codigo real, ademas de intentar compilar data/*.lisp (que son datos,
+# no codigo) y el propio .asd.
+#
+# El gate correcto delega en ASDF, que compila en orden de dependencias, y en
+# la suite, que ademas verifica comportamiento y no solo compilabilidad.
 
 set -u
 
 LISP="${LISP:-sbcl}"
 
 if ! command -v "$LISP" >/dev/null 2>&1; then
-    echo "[!] $LISP not found on PATH. Install SBCL or set LISP=<implementation>."
+    echo "[!] $LISP no esta en el PATH. Instala SBCL o define LISP=<implementacion>."
     exit 1
 fi
 
-# Project sources only: dot-directories (.git, .vscode/alive scratch fasls,
-# .ace) and dependency trees are pruned, and quicklisp.lisp is excluded because
-# it is the upstream Quicklisp bootstrap installer, not project code.
-# -mindepth 1 keeps the '.' starting point itself from matching the '.*' prune.
-SOURCES=$(find . -mindepth 1 \
-    \( -name '.*' -o -name 'node_modules' -o -name 'quicklisp' \) -prune -o \
-    \( -name '*.lisp' -o -name '*.asd' \) -print \
-    | sed 's|^\./||' | grep -v '^quicklisp\.lisp$' | sort)
-
-if [ -z "$SOURCES" ]; then
-    echo "[!] No project Lisp sources found (*.lisp / *.asd, excluding"
-    echo "    quicklisp.lisp). There is nothing to verify, so this gate fails"
-    echo "    rather than passing on silence."
-    echo "    Add sources, or point verify.test_cmd in .aceconfig at the real"
-    echo "    acceptance command for this project."
+if [ ! -f "expert-system.asd" ]; then
+    echo "[!] No existe expert-system.asd: no hay sistema que verificar."
+    echo "    Este gate falla en vez de aprobar el silencio. Crea el sistema"
+    echo "    (tarea T001) o reapunta verify.test_cmd en .aceconfig."
     exit 1
 fi
 
-echo "[*] Compile-checking:"
-echo "$SOURCES" | sed 's/^/      /'
-
-# Deliberately a repo-relative scratch dir, not mktemp: SBCL is a native
-# Windows binary, so a Git Bash /tmp path reaches it as C:/tmp and fails to
-# open. A relative path is understood by both. Ignored via .gitignore.
-WORKDIR=".ace/.verify-cache"
-rm -rf "$WORKDIR"
-mkdir -p "$WORKDIR"
-trap 'rm -rf "$WORKDIR"' EXIT
-STATUS=0
-
-for src in $SOURCES; do
-    out="$WORKDIR/$(echo "$src" | tr '/' '_').fasl"
-    # compile-file's third value (failure-p) is true only for errors and
-    # full WARNINGs; STYLE-WARNINGs (undefined functions across files
-    # compiled in isolation) are expected here and are not failures.
-    if ! "$LISP" --non-interactive --no-userinit \
-        --eval "(let ((*compile-verbose* nil) (*compile-print* nil))
-                  (multiple-value-bind (fasl warn fail)
-                      (handler-case (compile-file \"$src\" :output-file \"$out\")
-                        (error (e) (format *error-output* \"~a~%\" e) (values nil t t)))
-                    (declare (ignore fasl warn))
-                    (when fail (sb-ext:exit :code 1))))" >"$WORKDIR/log" 2>&1; then
-        echo "[!] FAILED: $src"
-        sed 's/^/      /' "$WORKDIR/log"
-        STATUS=1
+# run-tests.lisp carga :expert-system/tests, que depende de :expert-system.
+# Una sola invocacion compila todo src/ en orden de dependencias y despues
+# corre la suite completa.
+if [ -f "run-tests.lisp" ]; then
+    echo "[*] Compilando el sistema y corriendo la suite (ASDF + FiveAM)..."
+    if "$LISP" --script run-tests.lisp; then
+        echo "[ok] El sistema compila y la suite pasa."
+        exit 0
     fi
-done
-
-if [ "$STATUS" -ne 0 ]; then
-    echo "[!] Lisp compile check failed."
+    echo "[!] Fallo la compilacion del sistema o alguna prueba."
     exit 1
 fi
 
-echo "[ok] All project Lisp sources compiled cleanly."
+# Sin suite todavia: al menos se comprueba que el sistema cargue completo.
+echo "[*] No hay run-tests.lisp. Se verifica solo que el sistema cargue."
+if "$LISP" --non-interactive --no-userinit \
+     --eval '(require :asdf)' \
+     --eval '(push (truename ".") asdf:*central-registry*)' \
+     --eval '(asdf:load-system :expert-system)' >/dev/null 2>&1; then
+    echo "[ok] El sistema carga y compila."
+    echo "[!] Aviso: sin suite de pruebas este gate solo cubre compilacion."
+    exit 0
+fi
 
-# TODO: once an ASDF system exists, replace/extend the above with the real
-# behavioural gate, e.g.:
-#   sbcl --non-interactive \
-#        --eval '(asdf:load-asd (truename "expert-system.asd"))' \
-#        --eval '(asdf:test-system :expert-system/tests)'
-
-exit 0
+echo "[!] El sistema no carga. Detalle:"
+"$LISP" --non-interactive --no-userinit \
+     --eval '(require :asdf)' \
+     --eval '(push (truename ".") asdf:*central-registry*)' \
+     --eval '(asdf:load-system :expert-system)' 2>&1 | tail -20 | sed 's/^/    /'
+exit 1

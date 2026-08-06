@@ -16,14 +16,17 @@ justifica la recomendación.
 | Elemento | Estado |
 | -------- | ------ |
 | Diseño y documentación | ✅ Completo |
-| Código de implementación | ⬜ Ninguno todavía |
-| Cola de tareas | 14 pendientes, T001 lista para arrancar |
-| Gate de verificación | 🔴 En rojo **a propósito** (ver abajo) |
+| Código de implementación | ✅ Primera versión funcional, rama `feature/initial-lisp-implementation` |
+| Cola de tareas | 10 de 14 verificadas (T001–T010); ver `docs/progress/tasks.json` |
+| Catálogo de datos | 47 cursos reales (Bachillerato en Ingeniería en Sistemas de Computación, Fidélitas); créditos, dificultad, horario y prerrequisitos siguen siendo provisionales — ver `docs/context/ACTIVE_CONTEXT.md` |
+| Suite de pruebas | 182 comprobaciones, 0 fallos (`sbcl --script run-tests.lisp`) |
+| Gate de verificación | 🟢 En verde (`sh .ace/scripts/verify.sh` compila el sistema con ASDF y corre la suite) |
 
-**El gate en rojo no es un error.** `.ace/scripts/verify.sh` falla
-deliberadamente mientras no existan fuentes Lisp que verificar, porque un gate
-que aprueba el silencio no sirve de nada. Se pone en verde con la primera
-tarea.
+Para el estado completo y detallado — qué es oficial, qué es provisional,
+qué falta y por dónde seguir — ver
+**[docs/context/ACTIVE_CONTEXT.md](docs/context/ACTIVE_CONTEXT.md)**. Este
+README describe la arquitectura y cómo arrancar; ACTIVE_CONTEXT.md es la
+fuente de verdad sobre el progreso.
 
 ---
 
@@ -38,9 +41,16 @@ Necesitás:
 ```bash
 git clone https://github.com/Wardaddy118/Expert_System_Lisp.git
 cd Expert_System_Lisp
-sh .ace/scripts/verify.sh    # va a decir FAIL: es lo esperado por ahora
+git checkout feature/initial-lisp-implementation
+sh .ace/scripts/verify.sh      # debe decir VERIFY_RESULT=pass
+sbcl --script run.lisp         # corre la demostracion completa
+sbcl --script run-tests.lisp   # corre la suite (182 comprobaciones)
 ```
 
+> **La primera corrida descarga FiveAM** con Quicklisp, así que necesita
+> internet una sola vez. Es la única dependencia externa del proyecto y solo
+> se usa en pruebas: el sistema principal carga con SBCL y nada más (ADR-004).
+>
 > **En Mac o Linux:** en `.claude/settings.json` cambiá la ruta a `sh.exe` por
 > `sh <script>`. Esa ruta apunta a Git for Windows.
 
@@ -56,7 +66,7 @@ que hace falta para entender el proyecto:
 | 1 | [docs/context/ACTIVE_CONTEXT.md](docs/context/ACTIVE_CONTEXT.md) | Dónde estamos parados y qué sigue |
 | 2 | [docs/requirements/PRD-recomendador-academico.md](docs/requirements/PRD-recomendador-academico.md) | Qué se va a construir: requisitos, casos borde, riesgos |
 | 3 | [docs/adr/ADR-005-motor-inferencia.md](docs/adr/ADR-005-motor-inferencia.md) | El corazón del proyecto, y por qué **no** usamos CLIPS |
-| 4 | [.ace/knowledge/business-rules.md](.ace/knowledge/business-rules.md) | Las 20 reglas del conocimiento experto |
+| 4 | [.ace/knowledge/business-rules.md](.ace/knowledge/business-rules.md) | Las reglas del conocimiento experto (BR-001 en adelante; 25 `defrule` en `src/domain/knowledge.lisp`) |
 | 5 | [docs/planning/implementation_plan.md](docs/planning/implementation_plan.md) | Las 5 fases y las 14 tareas |
 
 ---
@@ -192,9 +202,14 @@ imperativo: `add forward-chaining agenda`.
 
 ## Qué falta decidir
 
+### Ya resueltas
+
+- [x] Carrera y universidad a modelar: Bachillerato en Ingeniería en
+      Sistemas de Computación, Universidad Fidélitas. Catálogo real de 47
+      cursos cargado en `data/courses.lisp` (T002 verificada).
+
 ### Bloquean el arranque
 
-- [ ] Carrera y universidad a modelar — bloquea T002 (catálogo de 40–60 cursos)
 - [ ] Fechas del borrador y de la semana 15
 - [ ] Reparto de las 14 tareas entre el equipo
 - [ ] Si el profesor exige un formato de informe además del código
