@@ -5,15 +5,15 @@
 - **Última actualización:** 2026-08-05
 - **Rol activo:** Developer
 - **Mode:** EXECUTION (implementación en curso, no diseño)
-- **Próxima transición:** EXECUTION → EXECUTION (quedan tareas de datos oficiales
-  y de CLI interactiva; ver "Próxima tarea recomendada" abajo)
+- **Próxima transición:** EXECUTION → EXECUTION (quedan T012, T013 y T014;
+  ver "Qué falta para la entrega final" abajo)
 
 ## Cómo arrancar en esta sesión
 
 ```bash
-git branch --show-current   # feature/initial-lisp-implementation
+git checkout main && git pull   # todo esta fusionado en main
 sbcl --script run.lisp        # corre la demostracion completa
-sbcl --script run-tests.lisp  # corre la suite de pruebas (182 comprobaciones)
+sbcl --script run-tests.lisp  # corre la suite de pruebas (235 comprobaciones)
 ```
 
 Si cualquiera de los dos scripts falla, **no continuar**: hay una regresión
@@ -39,7 +39,7 @@ exige el profesor y se cree que alguien del equipo lo está redactando —
   la primera versión funcional completa.
 - **Gate de verificación:** en verde y ya verifica comportamiento, no solo
   compilación. `sh .ace/scripts/verify.sh` compila el sistema con ASDF (en
-  orden de dependencias) y corre las 182 comprobaciones de la suite.
+  orden de dependencias) y corre las 235 comprobaciones de la suite.
 
 ### Dos defectos de verificación corregidos (2026-08-05, sesión de revisión)
 
@@ -58,7 +58,7 @@ seguir con tareas nuevas:
    Quicklisp pero pedía FiveAM con `asdf:load-system`, que resuelve lo ya
    instalado pero **no descarga** lo que falta. Fallaba con
    `Component #:FIVEAM not found` en cualquier máquina donde nadie la hubiera
-   bajado a mano. Ahora usa `ql:quickload`. Las 182 comprobaciones son
+   bajado a mano. Ahora usa `ql:quickload`. Las comprobaciones de la suite son
    reproducibles por cualquiera del equipo y por el profesor.
 
 ## Qué existe hoy
@@ -129,8 +129,8 @@ conjunto de tamaño variable no se expresa con condiciones de aridad fija):
   limite de una electiva por bloque. Corre antes que `apply-credit-limit`
   para no gastar presupuesto de creditos en una electiva que de todas
   formas se descartaria por venir del mismo bloque que otra mejor
-  puntuada. No tiene todavia un BR-0xx formal en business-rules.md — ver
-  "Decisiones pendientes".
+  puntuada. Formalizada como **BR-008** en business-rules.md el
+  2026-08-06; el docstring la cita.
 - Explicaciones (`explain.lisp`) reconstruidas desde la traza, nunca
   generadas aparte.
 - Estadisticas (`stats.lisp`) calculadas sobre la memoria de trabajo
@@ -273,18 +273,43 @@ depende de esos prerrequisitos. Ver la tabla de arriba y la cabecera de
   documentación futura, o si conviene un término distinto para evitar
   confusión con "ciclo del CPU" o "ciclo de vida del proyecto".
 
-## Próxima tarea recomendada
+## Qué falta para la entrega final (2026-08-20)
 
-**Prioridad alta**, en orden:
+**Tres tareas en la cola**, en orden de dependencias:
 
-1. Implementar captura interactiva del perfil en `src/cli/session.lisp`
-   (hoy usa `data/profiles/sample-profile.lisp` fijo).
-2. Conseguir y cargar créditos oficiales.
-3. Conseguir y cargar prerrequisitos y correquisitos oficiales — esto es
-   lo que más cambia la fidelidad del sistema, porque BR-006 (cuello de
-   botella) depende enteramente de esto.
-4. Formalizar en `.ace/knowledge/business-rules.md` la regla de límite de
-   electiva por bloque (hoy solo está documentada en el código y aquí).
+1. **T012 — Captura interactiva del perfil** en `src/cli/session.lisp`. Hoy
+   carga `data/profiles/sample-profile.lisp` fijo, no pregunta por consola.
+   Es el hueco más visible en una demostración en vivo.
+2. **T013 — Perfiles de demostración.** Solo existe uno. Faltan primer
+   ingreso sin aprobados, estudiante avanzado, horario muy restringido y
+   tolerancia baja. **Lleva el criterio de cierre de la decisión D-09:** los
+   perfiles deben hacer disparar las tres reglas que hoy nunca disparan
+   (`bottleneck-exception-to-tolerance`, `priority-general-education`,
+   `recommended-via-general-education`) o esas reglas se eliminan.
+   Verificar con la cobertura de reglas de `catalog-statistics`.
+3. **T014 — Suite de aceptación** en un archivo dedicado. Los 10 criterios
+   del plan ya están cubiertos de forma dispersa por las 235 comprobaciones;
+   falta reunirlos.
+
+**Fuera de la cola, y no depende de nosotros:** conseguir créditos y
+prerrequisitos oficiales. Es lo que más cambiaría la fidelidad del sistema
+(BR-006 depende enteramente de los prerrequisitos), pero por decisión D-10 no
+bloquea la entrega: si llegan, es un cambio en `data/` y cero código.
+
+**Coordinación pendiente:** confirmar quién redacta el informe en formato
+IEEE que exige el profesor.
+
+## Ya resuelto en esta sesión (2026-08-06)
+
+- T011 (estadísticas de catálogo) verificada: cursos más recomendados,
+  cuellos de botella con `n`, dificultad promedio por área y cobertura de
+  reglas. Visible en `run.lisp`.
+- BR-008 formalizado: el límite de una electiva por bloque ya no es una
+  regla que solo existía en el código.
+- Los dos defectos de verificación descritos arriba.
+- Las seis decisiones de criterio experto ratificadas (D-05 a D-10 en
+  `PROJECT_CONTEXT.md`).
+- Suite: 182 → 235 comprobaciones.
 
 Ver la sección completa de próximas tareas, con prioridad media y
 posterior, en `docs/planning/implementation_plan.md` (a actualizar) y en

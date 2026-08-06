@@ -229,7 +229,7 @@
       "depends_on": ["T013"],
       "complexity": "M",
       "attempts": 0,
-      "notes": "La prueba de extensibilidad NFR-004 es la que demuestra que las reglas no quedaron cableadas. Si falla, se violo ADR-005. Estado 2026-08-05: no existe tests/acceptance.lisp como archivo dedicado, pero los 10 criterios estan cubiertos de forma dispersa por la suite real (182 comprobaciones en tests/engine/ y tests/domain/), incluida la prueba de extensibilidad. Formalizarlos en un solo archivo de aceptacion sigue pendiente."
+      "notes": "La prueba de extensibilidad NFR-004 es la que demuestra que las reglas no quedaron cableadas. Si falla, se violo ADR-005. Estado 2026-08-05: no existe tests/acceptance.lisp como archivo dedicado, pero los 10 criterios estan cubiertos de forma dispersa por la suite real (235 comprobaciones en tests/engine/, tests/domain/ y tests/cli/), incluida la prueba de extensibilidad. Formalizarlos en un solo archivo de aceptacion sigue pendiente."
     }
   ]
 }

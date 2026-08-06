@@ -6,7 +6,7 @@
 > versión funcional en `feature/initial-lisp-implementation`)
 > **Autor:** Architect (rol ACE); implementación por rol Developer
 > **PRD:** `docs/requirements/PRD-recomendador-academico.md`
-> **Cola de tareas:** `docs/progress/tasks.json` (10 de 14 verificadas)
+> **Cola de tareas:** `docs/progress/tasks.json` (11 de 14 verificadas)
 > **Línea base:** commit `9df7cf3` en `origin/main`
 > **Estado detallado y decisiones tomadas durante la implementación:**
 > `docs/context/ACTIVE_CONTEXT.md`
@@ -188,9 +188,9 @@ al terminar la Fase 1 y parte de la Fase 2 se cubre:
 | -------- | ------ |
 | Documentación de diseño | Completa y publicada (`9df7cf3`) |
 | Código de implementación | Primera versión funcional, rama `feature/initial-lisp-implementation` |
-| Cola de tareas | 10 de 14 verificadas (T001–T010); T011–T014 pendientes |
+| Cola de tareas | 11 de 14 verificadas (T001–T011); T012–T014 pendientes |
 | Gate de verificación | En verde: compila el sistema con ASDF y corre la suite completa |
-| Suite de pruebas | 182 comprobaciones, 0 fallos (`sbcl --script run-tests.lisp`) |
+| Suite de pruebas | 235 comprobaciones, 0 fallos (`sbcl --script run-tests.lisp`) |
 | Catálogo de datos | 47 cursos reales (Fidélitas); ver `docs/context/ACTIVE_CONTEXT.md` para qué campos son oficiales y cuáles provisionales |
 
 El gate compila con éxito desde que existe código real (Fase 1). Sigue

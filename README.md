@@ -16,11 +16,18 @@ justifica la recomendación.
 | Elemento | Estado |
 | -------- | ------ |
 | Diseño y documentación | ✅ Completo |
-| Código de implementación | ✅ Primera versión funcional, rama `feature/initial-lisp-implementation` |
-| Cola de tareas | 10 de 14 verificadas (T001–T010); ver `docs/progress/tasks.json` |
-| Catálogo de datos | 47 cursos reales (Bachillerato en Ingeniería en Sistemas de Computación, Fidélitas); créditos, dificultad, horario y prerrequisitos siguen siendo provisionales — ver `docs/context/ACTIVE_CONTEXT.md` |
-| Suite de pruebas | 182 comprobaciones, 0 fallos (`sbcl --script run-tests.lisp`) |
-| Gate de verificación | 🟢 En verde (`sh .ace/scripts/verify.sh` compila el sistema con ASDF y corre la suite) |
+| Código de implementación | ✅ Funcional y fusionado en `main` |
+| Cola de tareas | **11 de 14 verificadas** (T001–T011); faltan T012, T013 y T014 |
+| Catálogo de datos | 47 cursos reales (Bachillerato en Ingeniería en Sistemas de Computación, Fidélitas); créditos, dificultad, horario y prerrequisitos son provisionales y están marcados como tales |
+| Suite de pruebas | **235 comprobaciones, 0 fallos** (`sbcl --script run-tests.lisp`) |
+| Gate de verificación | 🟢 En verde (`sh .ace/scripts/verify.sh` compila con ASDF y corre la suite) |
+
+### Entregas
+
+| Entrega | Fecha | Estado |
+| ------- | ----- | ------ |
+| Borrador | jueves 6 de agosto de 2026 (semana 13) | ⏳ En curso |
+| Final: sistema 100% funcional | jueves 20 de agosto de 2026 (semana 15) | ⬜ Pendiente |
 
 Para el estado completo y detallado — qué es oficial, qué es provisional,
 qué falta y por dónde seguir — ver
@@ -41,11 +48,12 @@ Necesitás:
 ```bash
 git clone https://github.com/Wardaddy118/Expert_System_Lisp.git
 cd Expert_System_Lisp
-git checkout feature/initial-lisp-implementation
 sh .ace/scripts/verify.sh      # debe decir VERIFY_RESULT=pass
 sbcl --script run.lisp         # corre la demostracion completa
-sbcl --script run-tests.lisp   # corre la suite (182 comprobaciones)
+sbcl --script run-tests.lisp   # corre la suite (235 comprobaciones)
 ```
+
+Todo está en `main`: no hace falta cambiar de rama.
 
 > **La primera corrida descarga FiveAM** con Quicklisp, así que necesita
 > internet una sola vez. Es la única dependencia externa del proyecto y solo
@@ -170,9 +178,20 @@ docs/
   knowledge/     Glosario, entidades y reglas del dominio
   standards/     Convenciones de código
   scripts/       verify.sh — el gate de verificación
-src/             (por crear) Código fuente
-data/            (por crear) Catálogo de cursos y perfiles
-quicklisp.lisp   Instalador de Quicklisp. No es código del proyecto.
+src/
+  engine/        Motor genérico: hechos, matching, reglas, agenda, inferencia
+  domain/        Dominio académico: carga, 25 reglas, explicaciones, estadísticas
+  cli/           Presentación y flujo de sesión
+  package.lisp   Los tres paquetes
+  main.lisp      Punto de entrada
+data/
+  courses.lisp   Catálogo de 47 cursos
+  profiles/      Perfiles de estudiante
+tests/           Espejo de src/, un archivo por archivo
+expert-system.asd  Definición ASDF de los dos sistemas
+run.lisp           sbcl --script run.lisp → demostración completa
+run-tests.lisp     sbcl --script run-tests.lisp → suite de pruebas
+quicklisp.lisp     Instalador de Quicklisp. No es código del proyecto.
 ```
 
 ---
@@ -200,36 +219,41 @@ imperativo: `add forward-chaining agenda`.
 
 ---
 
-## Qué falta decidir
+## Qué falta
 
-### Ya resueltas
+### Tareas (3 de 14)
 
-- [x] Carrera y universidad a modelar: Bachillerato en Ingeniería en
-      Sistemas de Computación, Universidad Fidélitas. Catálogo real de 47
-      cursos cargado en `data/courses.lisp` (T002 verificada).
+| Tarea | Qué falta |
+| ----- | --------- |
+| **T012** | Captura interactiva del perfil. Hoy la sesión carga un perfil fijo desde `data/profiles/`, no pregunta por consola. |
+| **T013** | Perfiles de demostración. Solo existe uno; faltan primer ingreso, estudiante avanzado, horario restringido y tolerancia baja. |
+| **T014** | Suite de aceptación en un archivo dedicado. Los 10 criterios ya están cubiertos de forma dispersa por las 235 comprobaciones. |
 
-### Bloquean el arranque
+### Decisiones
 
-- [ ] Fechas del borrador y de la semana 15
-- [ ] Reparto de las 14 tareas entre el equipo
-- [ ] Si el profesor exige un formato de informe además del código
+Todas cerradas menos una, que es de coordinación:
 
-### Requieren ratificación del equipo
+- [ ] **El informe en formato IEEE.** El profesor lo exige. Se cree que alguien
+      del equipo lo está redactando, pero no está confirmado. Si nadie lo
+      tiene, el contenido ya existe en `docs/` (PRD, ADR-004 a ADR-006, plan,
+      resultados de tareas): es reorganizar, no escribir de cero.
 
-Hay un valor propuesto en la documentación, pero son juicios de dominio y
-alguien tiene que hacerse responsable de ellos:
+Las de criterio experto —dificultad, pesos de priorización, umbral de cuello de
+botella, excepción de tolerancia, reglas sin disparar y qué hacer con los datos
+oficiales faltantes— quedaron **ratificadas como D-05 a D-10** en
+[PROJECT_CONTEXT.md](docs/context/PROJECT_CONTEXT.md#decisiones-de-criterio-experto-ratificadas-2026-08-05),
+cada una con su justificación.
 
-- [ ] **Con qué criterio se asigna la dificultad 1–5 de cada curso, y quién lo
-      hace.** Es el más importante: si al preguntar "¿por qué este curso es
-      dificultad 4?" la respuesta es "nos pareció", el sistema experto pierde
-      su fundamento.
-- [ ] Los pesos de priorización BR-010 a BR-015
-- [ ] El umbral de cuello de botella (propuesto: requisito de ≥3 cursos)
-- [ ] Si se recomienda un cuello de botella que excede la tolerancia a
-      dificultad por un nivel
+### Datos que faltan (no bloquean)
 
-Detalle completo en el
-[PRD §Preguntas abiertas](docs/requirements/PRD-recomendador-academico.md#preguntas-abiertas).
+El programa de la universidad no declara créditos, prerrequisitos ni horarios.
+Se entrega con valores provisionales **etiquetados como tales** curso por curso
+(decisión D-10). Si aparecen los oficiales, es un cambio en `data/` y **cero
+líneas de código**: ADR-006 mantiene los datos fuera del código.
+
+Consecuencia honesta para la defensa: los cuellos de botella que reporta el
+sistema son correctos **dado el grafo cargado**, y ese grafo es de ejemplo. El
+razonamiento es real; los datos de entrada, parciales.
 
 ---
 
