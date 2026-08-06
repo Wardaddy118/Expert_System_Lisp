@@ -172,15 +172,17 @@
       "id": "T011",
       "name": "Estadisticas del catalogo",
       "objective": "domain/stats calcula ademas metricas agregadas del catalogo: cursos mas recomendados sobre el conjunto de perfiles de ejemplo, cursos cuello de botella con el numero de cursos que desbloquean, dificultad promedio por area y cobertura de reglas indicando cuales nunca dispararon.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
-        "modify": ["src/domain/stats.lisp", "tests/domain/stats.lisp"]
+        "modify": ["src/domain/stats.lisp", "tests/domain/stats-tests.lisp"],
+        "create": ["tests/cli/format-tests.lisp"]
       },
       "depends_on": ["T010"],
       "complexity": "M",
-      "attempts": 0,
-      "notes": "Pendiente, sin empezar. La cobertura de reglas es diagnostico util: una regla que nunca dispara es conocimiento muerto o datos que no la ejercitan. Estado 2026-08-05: no hay estadisticas a nivel de catalogo (cursos mas recomendados entre perfiles, cuello de botella con n, dificultad promedio por area, cobertura de reglas)."
+      "attempts": 1,
+      "result_file": "docs/progress/task_T011_result.md",
+      "notes": "Las cuatro metricas implementadas y visibles en run.lisp. La cobertura de reglas rindio de inmediato: 3 de 25 reglas nunca disparan (bottleneck-exception-to-tolerance, priority-general-education, recommended-via-general-education); hay que decidir si sobran o si los datos no las ejercitan. De paso se corrigieron dos defectos: la suite pasaba mientras run.lisp reventaba (ninguna prueba renderizaba el informe) y tres lineas excedian las 80 columnas de FR-050. Suite: 182 -> 235 comprobaciones."
     },
     {
       "id": "T012",

@@ -56,6 +56,9 @@
                               (:file "knowledge-tests")
                               (:file "explain-tests")
                               (:file "stats-tests")))
+                (:module "cli"
+                 :serial t
+                 :components ((:file "format-tests")))
                 (:file "test-runner"))
   :perform (asdf:test-op (op system)
              (uiop:symbol-call :expert-system.tests :run-project-tests)))

@@ -183,6 +183,37 @@ se cambian, se actualiza esta tabla en el mismo commit.
   que no hubo coincidencia de intereses. Es preferible a devolver una lista
   vacía.
 
+### BR-008: Una sola electiva por bloque
+
+- **Categoría:** Dura
+- **Descripción:** De los cursos `recommended` que comparten el mismo
+  `elective-group`, solo se conserva el de mayor prioridad acumulada. El resto
+  se marca `(excluded <id> elective-group-limit)`.
+- **Justificación:** El plan de estudios ofrece cada bloque electivo como un
+  menú de opciones del que el estudiante escoge **una**. Recomendar dos
+  electivas del mismo bloque propone algo que la matrícula no permite, igual
+  que recomendar un curso sin sus requisitos.
+- **Aplicación:** `apply-elective-group-limit` en `src/domain/knowledge.lisp`.
+  Es **post-procesamiento después de la quiescencia**, no una `defrule`, por
+  la misma razón que BR-004: comparar entre sí un conjunto de tamaño variable
+  no se expresa con condiciones de aridad fija.
+- **Orden:** corre **antes** que `apply-credit-limit` (BR-004), para no gastar
+  presupuesto de créditos en una electiva que igual se descartaría por venir
+  del mismo bloque que otra mejor puntuada.
+- **Excepciones:** Ninguna.
+- **Ejemplo:**
+
+  ```text
+  Válido:   bloque 3 con SC-801 (prioridad 18) y SC-802 (prioridad 12)
+            → se recomienda SC-801; SC-802 queda excluded, elective-group-limit
+  Inválido: recomendar SC-801 y SC-802 juntos: el estudiante solo lleva una
+  ```
+
+> **Nota de trazabilidad:** esta regla se implementó durante la sesión de
+> implementación (commit `19c680a`) y funcionaba antes de estar especificada
+> aquí. Se documenta ahora para cerrar esa deuda. El orden correcto es el
+> inverso: primero el BR, después la implementación.
+
 ---
 
 ## Reglas de explicación (duras)

@@ -14,6 +14,7 @@
            #:query-facts
            #:defrule
            #:*rules*
+           #:rule-name
            #:run
            #:trace-entries
            #:trace-entry-cycle
@@ -73,7 +74,15 @@
            #:stats-too-difficult
            #:stats-eligible
            #:stats-average-difficulty
-           #:stats-recommended-credits))
+           #:stats-recommended-credits
+           #:catalog-statistics
+           #:catalog-stats-profiles-analyzed
+           #:catalog-stats-most-recommended
+           #:catalog-stats-bottlenecks
+           #:catalog-stats-difficulty-by-area
+           #:catalog-stats-rules-total
+           #:catalog-stats-rules-fired
+           #:catalog-stats-rules-never-fired))
 
 ;;; CLI: unica capa con E/S de usuario. Usa domain: con prefijo explicito.
 (defpackage #:expert-system.cli
