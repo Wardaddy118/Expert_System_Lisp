@@ -25,10 +25,29 @@ que resolver antes de seguir con cualquier otra tarea.
 - **Código de implementación:** existe y funciona. Ya no es correcto decir
   "el Architect no lo escribe": la fase de diseño cerró y esta rama contiene
   la primera versión funcional completa.
-- **Gate de verificación:** `.ace/scripts/verify-lisp.sh` compila los fuentes
-  y sigue en verde. **Pendiente:** todavía no se reapuntó a
-  `asdf:test-system :expert-system/tests` para que verifique comportamiento
-  y no solo compilación (ver "Próxima tarea recomendada").
+- **Gate de verificación:** en verde y ya verifica comportamiento, no solo
+  compilación. `sh .ace/scripts/verify.sh` compila el sistema con ASDF (en
+  orden de dependencias) y corre las 182 comprobaciones de la suite.
+
+### Dos defectos de verificación corregidos (2026-08-05, sesión de revisión)
+
+Ambos hacían que "verificado" no significara nada; se arreglaron antes de
+seguir con tareas nuevas:
+
+1. **El gate nunca funcionó con código Lisp real.** La primera versión de
+   `.ace/scripts/verify-lisp.sh` compilaba cada archivo por separado, en un
+   proceso SBCL nuevo por archivo. Todo archivo real empieza con
+   `(in-package :expert-system.engine)` y ese paquete se define en
+   `src/package.lisp`, que no está cargado en un proceso nuevo: fallaban
+   *todos* los fuentes, más `data/*.lisp` (que son datos) y el propio `.asd`.
+   Había pasado la prueba de humo inicial solo porque aquel archivo definía su
+   paquete inline. Ahora el gate delega en ASDF.
+2. **La suite no corría en un clon limpio.** `run-tests.lisp` cargaba
+   Quicklisp pero pedía FiveAM con `asdf:load-system`, que resuelve lo ya
+   instalado pero **no descarga** lo que falta. Fallaba con
+   `Component #:FIVEAM not found` en cualquier máquina donde nadie la hubiera
+   bajado a mano. Ahora usa `ql:quickload`. Las 182 comprobaciones son
+   reproducibles por cualquiera del equipo y por el profesor.
 
 ## Qué existe hoy
 

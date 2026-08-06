@@ -170,7 +170,7 @@ al terminar la Fase 1 y parte de la Fase 2 se cubre:
 | Documentación de diseño | Completa y publicada (`9df7cf3`) |
 | Código de implementación | Primera versión funcional, rama `feature/initial-lisp-implementation` |
 | Cola de tareas | 10 de 14 verificadas (T001–T010); T011–T014 pendientes |
-| Gate de verificación | En verde: `.ace/scripts/verify-lisp.sh` compila todo `src/` sin error |
+| Gate de verificación | En verde: compila el sistema con ASDF y corre la suite completa |
 | Suite de pruebas | 182 comprobaciones, 0 fallos (`sbcl --script run-tests.lisp`) |
 | Catálogo de datos | 47 cursos reales (Fidélitas); ver `docs/context/ACTIVE_CONTEXT.md` para qué campos son oficiales y cuáles provisionales |
 

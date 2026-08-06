@@ -2,7 +2,7 @@
   "version": "1.0",
   "plan_ref": "docs/planning/implementation_plan.md",
   "created": "2026-08-05T12:00:00Z",
-  "updated": "2026-08-05T18:00:00Z",
+  "updated": "2026-08-05T21:00:00Z",
   "defaults": {
     "max_attempts": 3,
     "runner": "manual",
@@ -26,7 +26,7 @@
       "complexity": "S",
       "attempts": 1,
       "result_file": "docs/progress/task_T001_result.md",
-      "notes": "Verificado con run-tests.lisp (182 comprobaciones, 0 fallos), no con tests/suite.lisp: la suite real vive en tests/package.lisp + tests/test-runner.lisp. Pendiente: reapuntar verify.test_cmd en .aceconfig a 'sbcl --non-interactive --eval (asdf:test-system :expert-system/tests)' para que el gate verifique comportamiento y no solo compilacion."
+      "notes": "Verificado con run-tests.lisp (182 comprobaciones, 0 fallos), no con tests/suite.lisp: la suite real vive en tests/package.lisp + tests/test-runner.lisp. RESUELTO 2026-08-05: el gate ya no compila archivo por archivo (eso fallaba con todo codigo real por los in-package); ahora verify-lisp.sh delega en ASDF y corre la suite, y run-tests.lisp usa ql:quickload para que FiveAM se descargue en un clon limpio."
     },
     {
       "id": "T002",

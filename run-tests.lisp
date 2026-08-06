@@ -16,6 +16,14 @@
       (error "No se encontro Quicklisp en ~a. Se necesita para cargar FiveAM."
              quicklisp-init)))
 
+;; FiveAM es la unica dependencia externa del proyecto y solo de pruebas
+;; (ADR-004). Hay que pedirla con QL:QUICKLOAD, no con ASDF:LOAD-SYSTEM:
+;; asdf resuelve lo que ya esta instalado pero NO descarga lo que falta, asi
+;; que la suite reventaba con "Component #:FIVEAM not found" en cualquier
+;; maquina donde nadie la hubiera bajado a mano antes. Este es el paso que
+;; hace que un clon limpio pueda correr las pruebas.
+(ql:quickload :fiveam :silent t)
+
 (let ((root (make-pathname :directory (pathname-directory *load-truename*))))
   (push root asdf:*central-registry*)
   (asdf:load-system :expert-system/tests))

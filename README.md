@@ -20,7 +20,7 @@ justifica la recomendación.
 | Cola de tareas | 10 de 14 verificadas (T001–T010); ver `docs/progress/tasks.json` |
 | Catálogo de datos | 47 cursos reales (Bachillerato en Ingeniería en Sistemas de Computación, Fidélitas); créditos, dificultad, horario y prerrequisitos siguen siendo provisionales — ver `docs/context/ACTIVE_CONTEXT.md` |
 | Suite de pruebas | 182 comprobaciones, 0 fallos (`sbcl --script run-tests.lisp`) |
-| Gate de verificación | 🟢 En verde (`.ace/scripts/verify-lisp.sh` compila todo `src/`) |
+| Gate de verificación | 🟢 En verde (`sh .ace/scripts/verify.sh` compila el sistema con ASDF y corre la suite) |
 
 Para el estado completo y detallado — qué es oficial, qué es provisional,
 qué falta y por dónde seguir — ver
@@ -42,11 +42,15 @@ Necesitás:
 git clone https://github.com/Wardaddy118/Expert_System_Lisp.git
 cd Expert_System_Lisp
 git checkout feature/initial-lisp-implementation
-sh .ace/scripts/verify.sh     # deberia decir VERIFY_RESULT=pass
+sh .ace/scripts/verify.sh      # debe decir VERIFY_RESULT=pass
 sbcl --script run.lisp         # corre la demostracion completa
 sbcl --script run-tests.lisp   # corre la suite (182 comprobaciones)
 ```
 
+> **La primera corrida descarga FiveAM** con Quicklisp, así que necesita
+> internet una sola vez. Es la única dependencia externa del proyecto y solo
+> se usa en pruebas: el sistema principal carga con SBCL y nada más (ADR-004).
+>
 > **En Mac o Linux:** en `.claude/settings.json` cambiá la ruta a `sh.exe` por
 > `sh <script>`. Esa ruta apunta a Git for Windows.
 
