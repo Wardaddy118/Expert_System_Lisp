@@ -93,7 +93,7 @@
    Cada union exitosa produce un binding-set nuevo con el hecho agregado."
   (let ((result nil))
     (dolist (bs binding-sets result)
-      (dolist (f (working-memory-facts wm))
+      (dolist (f (facts-for-pattern pattern wm))
         (multiple-value-bind (new-vars matched-p)
             (unify-pattern pattern (fact-content f) (binding-set-vars bs))
           (when matched-p
@@ -108,7 +108,7 @@
    (lambda (bs)
      (some (lambda (f)
              (nth-value 1 (unify-pattern pattern (fact-content f) (binding-set-vars bs))))
-           (working-memory-facts wm)))
+           (facts-for-pattern pattern wm)))
    binding-sets))
 
 ;;; --- Pruebas estructurales -------------------------------------------

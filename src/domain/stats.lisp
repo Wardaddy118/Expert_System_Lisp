@@ -43,20 +43,15 @@
                                                (session-recommendations session))
                                    :initial-value 0))))
 
-(defun course-credits (wm course-id)
-  (or (third (find course-id (engine:query-facts wm 'credits)
-                   :key #'second :test #'equal))
-      0))
-
 (defun approved-credits (wm)
   "Suma de creditos de los cursos aprobados por el estudiante (FR-040)."
-  (reduce #'+ (mapcar (lambda (f) (course-credits wm (second f)))
+  (reduce #'+ (mapcar (lambda (f) (or (course-credits wm (second f)) 0))
                       (engine:query-facts wm 'approved))
           :initial-value 0))
 
 (defun total-credits (wm)
   "Suma de creditos de todo el catalogo cargado (FR-040)."
-  (reduce #'+ (mapcar (lambda (f) (course-credits wm (second f)))
+  (reduce #'+ (mapcar (lambda (f) (or (course-credits wm (second f)) 0))
                       (engine:query-facts wm 'course))
           :initial-value 0))
 
@@ -86,7 +81,7 @@
     (sort (loop for area being the hash-keys of by-area using (hash-value ids)
                 collect (list area
                               (length ids)
-                              (reduce #'+ (mapcar (lambda (id) (course-credits wm id)) ids)
+                              (reduce #'+ (mapcar (lambda (id) (or (course-credits wm id) 0)) ids)
                                       :initial-value 0)))
           #'string< :key (lambda (row) (symbol-name (first row))))))
 

@@ -59,6 +59,9 @@ Todo está en `main`: no hace falta cambiar de rama.
 Guía detallada de ejecución, demostración y solución de problemas:
 **[COMO-EJECUTAR.md](COMO-EJECUTAR.md)**.
 
+Documento de diseño y arquitectura, con diagramas, las 25 reglas y los ejemplos:
+**[docs/DISENO-Y-ARQUITECTURA.pdf](docs/DISENO-Y-ARQUITECTURA.pdf)** (21 páginas).
+
 > **La primera corrida descarga FiveAM** con Quicklisp, así que necesita
 > internet una sola vez. Es la única dependencia externa del proyecto y solo
 > se usa en pruebas: el sistema principal carga con SBCL y nada más (ADR-004).
