@@ -2,7 +2,7 @@
   "version": "1.0",
   "plan_ref": "docs/planning/implementation_plan.md",
   "created": "2026-08-05T12:00:00Z",
-  "updated": "2026-08-05T21:00:00Z",
+  "updated": "2026-08-06T14:00:00Z",
   "defaults": {
     "max_attempts": 3,
     "runner": "manual",
@@ -35,7 +35,9 @@
       "status": "verified",
       "role": "Developer",
       "files": {
-        "create": ["data/courses.lisp"]
+        "create": [
+          "data/courses.lisp"
+        ]
       },
       "depends_on": [],
       "complexity": "M",
@@ -50,9 +52,14 @@
       "status": "verified",
       "role": "Developer",
       "files": {
-        "create": ["src/engine/facts.lisp", "tests/engine/facts.lisp"]
+        "create": [
+          "src/engine/facts.lisp",
+          "tests/engine/facts.lisp"
+        ]
       },
-      "depends_on": ["T001"],
+      "depends_on": [
+        "T001"
+      ],
       "complexity": "S",
       "attempts": 1,
       "result_file": "docs/progress/task_T003_result.md",
@@ -65,9 +72,14 @@
       "status": "verified",
       "role": "Developer",
       "files": {
-        "create": ["src/engine/matching.lisp", "tests/engine/matching.lisp"]
+        "create": [
+          "src/engine/matching.lisp",
+          "tests/engine/matching.lisp"
+        ]
       },
-      "depends_on": ["T003"],
+      "depends_on": [
+        "T003"
+      ],
       "complexity": "L",
       "attempts": 1,
       "result_file": "docs/progress/task_T004_result.md",
@@ -80,9 +92,14 @@
       "status": "verified",
       "role": "Developer",
       "files": {
-        "create": ["src/engine/rules.lisp", "tests/engine/rules.lisp"]
+        "create": [
+          "src/engine/rules.lisp",
+          "tests/engine/rules.lisp"
+        ]
       },
-      "depends_on": ["T004"],
+      "depends_on": [
+        "T004"
+      ],
       "complexity": "M",
       "attempts": 1,
       "result_file": "docs/progress/task_T005_result.md",
@@ -102,7 +119,9 @@
           "tests/engine/inference.lisp"
         ]
       },
-      "depends_on": ["T005"],
+      "depends_on": [
+        "T005"
+      ],
       "complexity": "L",
       "attempts": 1,
       "result_file": "docs/progress/task_T006_result.md",
@@ -115,9 +134,15 @@
       "status": "verified",
       "role": "Developer",
       "files": {
-        "create": ["src/domain/loader.lisp", "tests/domain/loader.lisp"]
+        "create": [
+          "src/domain/loader.lisp",
+          "tests/domain/loader.lisp"
+        ]
       },
-      "depends_on": ["T006", "T002"],
+      "depends_on": [
+        "T006",
+        "T002"
+      ],
       "complexity": "M",
       "attempts": 2,
       "result_file": "docs/progress/task_T007_result.md",
@@ -130,9 +155,14 @@
       "status": "verified",
       "role": "Developer",
       "files": {
-        "create": ["src/domain/knowledge.lisp", "tests/domain/knowledge.lisp"]
+        "create": [
+          "src/domain/knowledge.lisp",
+          "tests/domain/knowledge.lisp"
+        ]
       },
-      "depends_on": ["T007"],
+      "depends_on": [
+        "T007"
+      ],
       "complexity": "L",
       "attempts": 2,
       "result_file": "docs/progress/task_T008_result.md",
@@ -145,9 +175,14 @@
       "status": "verified",
       "role": "Developer",
       "files": {
-        "create": ["src/domain/explain.lisp", "tests/domain/explain.lisp"]
+        "create": [
+          "src/domain/explain.lisp",
+          "tests/domain/explain.lisp"
+        ]
       },
-      "depends_on": ["T008"],
+      "depends_on": [
+        "T008"
+      ],
       "complexity": "M",
       "attempts": 1,
       "result_file": "docs/progress/task_T009_result.md",
@@ -160,9 +195,14 @@
       "status": "verified",
       "role": "Developer",
       "files": {
-        "create": ["src/domain/stats.lisp", "tests/domain/stats.lisp"]
+        "create": [
+          "src/domain/stats.lisp",
+          "tests/domain/stats.lisp"
+        ]
       },
-      "depends_on": ["T008"],
+      "depends_on": [
+        "T008"
+      ],
       "complexity": "M",
       "attempts": 1,
       "result_file": "docs/progress/task_T010_result.md",
@@ -175,10 +215,17 @@
       "status": "verified",
       "role": "Developer",
       "files": {
-        "modify": ["src/domain/stats.lisp", "tests/domain/stats-tests.lisp"],
-        "create": ["tests/cli/format-tests.lisp"]
+        "modify": [
+          "src/domain/stats.lisp",
+          "tests/domain/stats-tests.lisp"
+        ],
+        "create": [
+          "tests/cli/format-tests.lisp"
+        ]
       },
-      "depends_on": ["T010"],
+      "depends_on": [
+        "T010"
+      ],
       "complexity": "M",
       "attempts": 1,
       "result_file": "docs/progress/task_T011_result.md",
@@ -188,48 +235,82 @@
       "id": "T012",
       "name": "CLI de sesion completa",
       "objective": "src/cli conduce la sesion completa por consola: captura cursos aprobados, intereses, area objetivo, disponibilidad horaria, tolerancia a dificultad y tope de creditos; dispara el motor; presenta las recomendaciones ordenadas por prioridad; permite pedir la explicacion de un curso; y muestra ambas familias de estadisticas. La salida es legible en 80 columnas.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
         "create": [
+          "src/cli/prompt.lisp",
+          "run-interactive.lisp",
+          "tests/cli/session-tests.lisp"
+        ],
+        "modify": [
           "src/cli/session.lisp",
           "src/cli/format.lisp",
+          "src/domain/loader.lisp",
+          "src/domain/knowledge.lisp",
           "src/main.lisp",
-          "tests/cli/session.lisp"
+          "src/package.lisp",
+          "expert-system.asd"
         ]
       },
-      "depends_on": ["T009", "T011"],
+      "depends_on": [
+        "T009",
+        "T011"
+      ],
       "complexity": "L",
-      "attempts": 0,
-      "notes": "main.lisp es el unico archivo donde se permiten simbolos SB-*. La logica de sesion debe ser probable sin E/S real. Estado 2026-08-05: src/cli/session.lisp y src/cli/format.lisp existen y funcionan, pero cargan un perfil FIJO (data/profiles/sample-profile.lisp), no capturan por consola. No marcar esta tarea como verificada hasta que exista captura interactiva real -- es la primera prioridad alta de la proxima sesion."
+      "attempts": 1,
+      "notes": "Captura interactiva en cli:start-interactive, con run-interactive.lisp como punto de entrada. run.lisp se dejo NO interactivo a proposito: es la demostracion reproducible y la que corre el gate. Para poder armar un perfil sin escribirlo a disco se separo load-profile (lee archivo) de assert-profile (afirma plist), y run-session de infer-session. Toda la captura recibe los streams como argumentos, asi que es probable sin E/S real: 13 pruebas la ejercitan con with-input-from-string. Suite 235 -> 255.",
+      "result_file": "docs/progress/task_T012_result.md"
     },
     {
       "id": "T013",
       "name": "Perfiles de demostracion",
       "objective": "data/profiles contiene al menos cuatro perfiles de ejemplo que ejercitan casos distintos: estudiante de primer ingreso sin aprobados, estudiante avanzado, estudiante con horario muy restringido y estudiante con tolerancia a dificultad baja. Cada perfil se puede cargar desde la CLI. Ademas, en conjunto los perfiles deben hacer disparar las tres reglas que hoy nunca disparan (bottleneck-exception-to-tolerance, priority-general-education, recommended-via-general-education): el estudiante avanzado cubre las dos de general-education y el de tolerancia baja debe cubrir la excepcion de cuello de botella.",
-      "status": "pending",
+      "status": "verified",
       "role": "Developer",
       "files": {
-        "create": ["data/profiles/README.md"]
+        "create": [
+          "data/profiles/first-year.lisp",
+          "data/profiles/advanced.lisp",
+          "data/profiles/tight-schedule.lisp",
+          "data/profiles/low-tolerance.lisp",
+          "data/profiles/README.md",
+          "tests/domain/profiles-tests.lisp"
+        ],
+        "modify": [
+          "src/cli/session.lisp",
+          "expert-system.asd"
+        ]
       },
-      "depends_on": ["T012"],
+      "depends_on": [
+        "T012"
+      ],
       "complexity": "S",
-      "attempts": 0,
-      "notes": "Pendiente. Estado 2026-08-05: solo existe un perfil, data/profiles/sample-profile.lisp, ajustado para ejercitar las 6 razones de descarte en una sola corrida. Faltan los otros tres casos (primer ingreso sin aprobados, horario muy restringido, tolerancia baja). CRITERIO DE CIERRE (decision D-09, PROJECT_CONTEXT.md): si al terminar esta tarea alguna de las tres reglas que hoy nunca disparan sigue sin dispararse con NINGUN perfil, esa regla se ELIMINA de knowledge.lisp y su BR se marca como retirada. Una regla que no se activa ni con perfiles disenados a proposito para activarla es conocimiento muerto. Verificar con la cobertura de reglas de catalog-statistics."
+      "attempts": 1,
+      "notes": "CRITERIO DE CIERRE D-09 CUMPLIDO: con los cinco perfiles disparan 25 de 25 reglas, ninguna hubo que eliminar. La causa de que las tres no dispararan era la data y no las reglas: los tres cursos de formacion general son nocturnos y el perfil original excluia la noche; y ningun perfil daba un cuello de botella que excediera la tolerancia por exactamente un nivel. advanced.lisp cubre las dos de general-education y low-tolerance.lisp la excepcion de BR-005. Los perfiles se cargan desde la CLI en la primera pregunta. Suite 255 -> 293.",
+      "result_file": "docs/progress/task_T013_result.md"
     },
     {
       "id": "T014",
       "name": "Pruebas de aceptacion del sistema",
       "objective": "Una suite de aceptacion verifica los diez criterios del plan de implementacion, incluyendo que ninguna recomendacion viole requisitos u horario, que el motor sea generico, que agregar una regla en tiempo de ejecucion funcione sin tocar el motor, que el motor siempre termine y que el catalogo tenga entre 40 y 60 cursos.",
-      "status": "pending",
+      "status": "verified",
       "role": "QA Engineer",
       "files": {
-        "create": ["tests/acceptance.lisp"]
+        "create": [
+          "tests/acceptance-tests.lisp"
+        ],
+        "modify": [
+          "expert-system.asd"
+        ]
       },
-      "depends_on": ["T013"],
+      "depends_on": [
+        "T013"
+      ],
       "complexity": "M",
-      "attempts": 0,
-      "notes": "La prueba de extensibilidad NFR-004 es la que demuestra que las reglas no quedaron cableadas. Si falla, se violo ADR-005. Estado 2026-08-05: no existe tests/acceptance.lisp como archivo dedicado, pero los 10 criterios estan cubiertos de forma dispersa por la suite real (235 comprobaciones en tests/engine/, tests/domain/ y tests/cli/), incluida la prueba de extensibilidad. Formalizarlos en un solo archivo de aceptacion sigue pendiente."
+      "attempts": 1,
+      "notes": "Los 10 criterios del plan reunidos en tests/acceptance-tests.lisp, nombrados acceptance-<n>-... La prueba de extensibilidad (criterio 5) y la de genericidad del motor (criterio 4) son las que demuestran que no se violo ADR-005. Dos criterios no estaban realmente verificados antes: el 9 (solo existian estadisticas del estudiante hasta T011) y el 10 (el tiempo nunca se habia medido; ahora se cronometra contra NFR-001). Suite 293 -> 344.",
+      "result_file": "docs/progress/task_T014_result.md"
     }
   ]
 }

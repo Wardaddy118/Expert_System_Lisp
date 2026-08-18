@@ -1,19 +1,20 @@
-# Active Context: Primera versión funcional implementada
+# Active Context: Cola completa — 14 de 14 tareas verificadas
 
 ## Session Metadata
 
-- **Última actualización:** 2026-08-05
+- **Última actualización:** 2026-08-06
 - **Rol activo:** Developer
 - **Mode:** EXECUTION (implementación en curso, no diseño)
-- **Próxima transición:** EXECUTION → EXECUTION (quedan T012, T013 y T014;
-  ver "Qué falta para la entrega final" abajo)
+- **Próxima transición:** ninguna pendiente en código. Lo que queda para la
+  entrega final es el informe IEEE y, si aparecen, los datos oficiales.
 
 ## Cómo arrancar en esta sesión
 
 ```bash
-git checkout main && git pull   # todo esta fusionado en main
-sbcl --script run.lisp        # corre la demostracion completa
-sbcl --script run-tests.lisp  # corre la suite de pruebas (235 comprobaciones)
+git checkout main && git pull        # todo esta fusionado en main
+sbcl --script run.lisp               # demostracion con perfil fijo
+sbcl --script run-interactive.lisp   # sesion que pregunta el perfil
+sbcl --script run-tests.lisp         # suite completa (344 comprobaciones)
 ```
 
 Si cualquiera de los dos scripts falla, **no continuar**: hay una regresión
@@ -26,20 +27,23 @@ que resolver antes de seguir con cualquier otra tarea.
 | **Borrador** | **jueves 2026-08-06** | 13 |
 | **Final: sistema 100% funcional** | **jueves 2026-08-20** | 15 |
 
-Quedan T012, T013 y T014 para la entrega final: dos semanas, con el motor, el
-dominio y las estadísticas ya verificados. El informe en **formato IEEE** lo
-exige el profesor y se cree que alguien del equipo lo está redactando —
-**confirmar**; si nadie lo tiene, el contenido ya existe en `docs/`.
+**Las 14 tareas están verificadas y los 10 criterios de aceptación tienen
+prueba automatizada.** No queda código pendiente para la entrega final.
+
+Lo único abierto es ajeno al repositorio: el informe en **formato IEEE** que
+exige el profesor (se cree que alguien del equipo lo redacta — **confirmar**;
+si nadie lo tiene, el contenido ya existe en `docs/`), y los datos oficiales
+de la universidad, que por decisión D-10 no bloquean.
 
 ## Estado del repositorio
 
-- **Rama:** `feature/initial-lisp-implementation`, fusionada a `main`
-- **Código de implementación:** existe y funciona. Ya no es correcto decir
-  "el Architect no lo escribe": la fase de diseño cerró y esta rama contiene
-  la primera versión funcional completa.
+- **Rama:** todo fusionado en `main`
+- **Código de implementación:** completo. Las 14 tareas de la cola están
+  verificadas y los 10 criterios de aceptación tienen prueba automatizada en
+  `tests/acceptance-tests.lisp`.
 - **Gate de verificación:** en verde y ya verifica comportamiento, no solo
   compilación. `sh .ace/scripts/verify.sh` compila el sistema con ASDF (en
-  orden de dependencias) y corre las 235 comprobaciones de la suite.
+  orden de dependencias) y corre las 344 comprobaciones de la suite.
 
 ### Dos defectos de verificación corregidos (2026-08-05, sesión de revisión)
 
@@ -67,8 +71,9 @@ seguir con tareas nuevas:
 
 ```text
 expert-system.asd   Sistemas expert-system y expert-system/tests
-run.lisp             sbcl --script run.lisp -> corre la demo completa
-run-tests.lisp        sbcl --script run-tests.lisp -> corre la suite FiveAM
+run.lisp             demostracion con perfil fijo (la que corre el gate)
+run-interactive.lisp  sesion que pregunta el perfil por consola
+run-tests.lisp        suite FiveAM completa
 src/
   package.lisp       Los tres paquetes: engine, domain, cli
   main.lisp          Punto de entrada; unico archivo con SB-* si hiciera falta
@@ -84,11 +89,12 @@ src/
     explain.lisp       Reconstruccion de explicaciones desde la traza
     stats.lisp          Estadisticas sobre la memoria de trabajo final
   cli/               Unica capa con E/S (usa domain: con prefijo)
+    prompt.lisp       Primitivas de pregunta/respuesta, streams explicitos
     format.lisp       Presentacion en texto
-    session.lisp        Orquesta una sesion con el perfil de demostracion
+    session.lisp        Captura interactiva y flujo de la sesion
 data/
   courses.lisp        Catalogo de 47 cursos (ver abajo)
-  profiles/sample-profile.lisp   Perfil de demostracion fijo
+  profiles/           Cinco perfiles de demostracion (ver su README)
 tests/               Espejo de src/, un archivo de pruebas por archivo de src/
 ```
 
@@ -273,47 +279,37 @@ depende de esos prerrequisitos. Ver la tabla de arriba y la cabecera de
   documentación futura, o si conviene un término distinto para evitar
   confusión con "ciclo del CPU" o "ciclo de vida del proyecto".
 
-## Qué falta para la entrega final (2026-08-20)
+## Qué falta
 
-**Tres tareas en la cola**, en orden de dependencias:
+**De código: nada.** La cola quedó en 14 de 14.
 
-1. **T012 — Captura interactiva del perfil** en `src/cli/session.lisp`. Hoy
-   carga `data/profiles/sample-profile.lisp` fijo, no pregunta por consola.
-   Es el hueco más visible en una demostración en vivo.
-2. **T013 — Perfiles de demostración.** Solo existe uno. Faltan primer
-   ingreso sin aprobados, estudiante avanzado, horario muy restringido y
-   tolerancia baja. **Lleva el criterio de cierre de la decisión D-09:** los
-   perfiles deben hacer disparar las tres reglas que hoy nunca disparan
-   (`bottleneck-exception-to-tolerance`, `priority-general-education`,
-   `recommended-via-general-education`) o esas reglas se eliminan.
-   Verificar con la cobertura de reglas de `catalog-statistics`.
-3. **T014 — Suite de aceptación** en un archivo dedicado. Los 10 criterios
-   del plan ya están cubiertos de forma dispersa por las 235 comprobaciones;
-   falta reunirlos.
+| Pendiente | Quién | Bloquea |
+| --------- | ----- | ------- |
+| Informe en formato IEEE | Equipo (confirmar quién) | La entrega final |
+| Créditos y prerrequisitos oficiales | Universidad | Nada (decisión D-10) |
 
-**Fuera de la cola, y no depende de nosotros:** conseguir créditos y
-prerrequisitos oficiales. Es lo que más cambiaría la fidelidad del sistema
-(BR-006 depende enteramente de los prerrequisitos), pero por decisión D-10 no
-bloquea la entrega: si llegan, es un cambio en `data/` y cero código.
+Si los datos oficiales llegan, es un cambio en `data/` y **cero líneas de
+código**: ADR-006 mantiene los datos fuera del código. Lo que sí cambia es la
+fidelidad de BR-006, porque los cuellos de botella se calculan sobre el grafo
+de prerrequisitos.
 
-**Coordinación pendiente:** confirmar quién redacta el informe en formato
-IEEE que exige el profesor.
+## Lo cerrado el 2026-08-06
 
-## Ya resuelto en esta sesión (2026-08-06)
-
-- T011 (estadísticas de catálogo) verificada: cursos más recomendados,
-  cuellos de botella con `n`, dificultad promedio por área y cobertura de
-  reglas. Visible en `run.lisp`.
-- BR-008 formalizado: el límite de una electiva por bloque ya no es una
-  regla que solo existía en el código.
-- Los dos defectos de verificación descritos arriba.
-- Las seis decisiones de criterio experto ratificadas (D-05 a D-10 en
-  `PROJECT_CONTEXT.md`).
-- Suite: 182 → 235 comprobaciones.
-
-Ver la sección completa de próximas tareas, con prioridad media y
-posterior, en `docs/planning/implementation_plan.md` (a actualizar) y en
-el historial de esta sesión.
+- **T011** estadísticas de catálogo: más recomendados, cuellos de botella,
+  dificultad por área y cobertura de reglas.
+- **T012** captura interactiva del perfil (`run-interactive.lisp`), separando
+  `load-profile` de `assert-profile` y `run-session` de `infer-session` para
+  que la sesión se pueda armar sin escribir a disco y probar sin E/S real.
+- **T013** cuatro perfiles nuevos. **Criterio de cierre de D-09 cumplido:
+  disparan 25 de 25 reglas, ninguna hubo que eliminar.** La causa de que tres
+  no dispararan eran los datos, no las reglas: los cursos de formación general
+  son nocturnos y el perfil original excluía la noche.
+- **T014** suite de aceptación con los 10 criterios del plan.
+- **BR-008** formalizado (una electiva por bloque).
+- **D-05 a D-10** ratificadas.
+- Dos defectos de verificación: la suite pasaba mientras `run.lisp` reventaba
+  (nada renderizaba el informe) y tres líneas excedían las 80 columnas.
+- Suite: 182 → 344 comprobaciones.
 
 ## Archivos principales para retomar el trabajo
 
@@ -322,9 +318,10 @@ el historial de esta sesión.
 | Entender el motor | `src/engine/inference.lisp` y `src/engine/matching.lisp` |
 | Entender las reglas académicas | `src/domain/knowledge.lisp` + `.ace/knowledge/business-rules.md` |
 | Agregar datos oficiales | `data/courses.lisp` (cabecera con la lista de campos pendientes de validar) |
-| Agregar captura interactiva | `src/cli/session.lisp` |
+| Tocar la captura interactiva | `src/cli/session.lisp` y `src/cli/prompt.lisp` |
+| Agregar un perfil de demostración | `data/profiles/` (leer su README primero) |
 | Correr o depurar | `run.lisp`, `run-tests.lisp` |
-| Ver qué falta | `docs/progress/tasks.json`, esta sección "Próxima tarea recomendada" |
+| Ver qué falta | `docs/progress/tasks.json` (cola completa) y la sección "Qué falta" |
 
 ## Restricciones activas (sin cambios)
 

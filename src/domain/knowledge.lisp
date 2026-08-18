@@ -346,10 +346,28 @@
   (let ((wm (engine:make-working-memory)))
     (load-catalog wm catalog-path)
     (load-profile wm profile-path)
-    (engine:run wm)
-    (apply-elective-group-limit wm)
-    (apply-credit-limit wm)
-    (build-session wm)))
+    (infer-session wm)))
+
+(defun run-session-with-profile (catalog-path profile-plist)
+  "Como RUN-SESSION, pero el perfil llega como property list en memoria en
+   vez de leerse de un archivo. Es la via que usa la captura interactiva de
+   la CLI, que arma el perfil preguntando por consola."
+  (let ((wm (engine:make-working-memory)))
+    (load-catalog wm catalog-path)
+    (assert-profile wm profile-plist)
+    (infer-session wm)))
+
+(defun infer-session (wm)
+  "Corre el motor sobre WM y construye el resultado de la sesion. Asume que
+   el catalogo y el perfil ya estan afirmados.
+
+   El orden importa: BR-008 (una electiva por bloque) va antes que BR-004
+   (tope de creditos), para no gastar presupuesto de creditos en una
+   electiva que igual se descartaria por su bloque."
+  (engine:run wm)
+  (apply-elective-group-limit wm)
+  (apply-credit-limit wm)
+  (build-session wm))
 
 (defun build-session (wm)
   (let* ((excluded-ids (remove-duplicates (mapcar #'second (engine:query-facts wm 'excluded))

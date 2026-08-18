@@ -17,16 +17,16 @@ justifica la recomendación.
 | -------- | ------ |
 | Diseño y documentación | ✅ Completo |
 | Código de implementación | ✅ Funcional y fusionado en `main` |
-| Cola de tareas | **11 de 14 verificadas** (T001–T011); faltan T012, T013 y T014 |
+| Cola de tareas | **14 de 14 verificadas** — cola completa |
 | Catálogo de datos | 47 cursos reales (Bachillerato en Ingeniería en Sistemas de Computación, Fidélitas); créditos, dificultad, horario y prerrequisitos son provisionales y están marcados como tales |
-| Suite de pruebas | **235 comprobaciones, 0 fallos** (`sbcl --script run-tests.lisp`) |
+| Suite de pruebas | **344 comprobaciones, 0 fallos** (`sbcl --script run-tests.lisp`) |
 | Gate de verificación | 🟢 En verde (`sh .ace/scripts/verify.sh` compila con ASDF y corre la suite) |
 
 ### Entregas
 
 | Entrega | Fecha | Estado |
 | ------- | ----- | ------ |
-| Borrador | jueves 6 de agosto de 2026 (semana 13) | ⏳ En curso |
+| Borrador | jueves 6 de agosto de 2026 (semana 13) | ✅ Listo |
 | Final: sistema 100% funcional | jueves 20 de agosto de 2026 (semana 15) | ⬜ Pendiente |
 
 Para el estado completo y detallado — qué es oficial, qué es provisional,
@@ -49,8 +49,9 @@ Necesitás:
 git clone https://github.com/Wardaddy118/Expert_System_Lisp.git
 cd Expert_System_Lisp
 sh .ace/scripts/verify.sh      # debe decir VERIFY_RESULT=pass
-sbcl --script run.lisp         # corre la demostracion completa
-sbcl --script run-tests.lisp   # corre la suite (235 comprobaciones)
+sbcl --script run.lisp         # demostracion con perfil fijo
+sbcl --script run-interactive.lisp  # sesion que pregunta tu perfil
+sbcl --script run-tests.lisp   # corre la suite (344 comprobaciones)
 ```
 
 Todo está en `main`: no hace falta cambiar de rama.
@@ -58,9 +59,7 @@ Todo está en `main`: no hace falta cambiar de rama.
 > **La primera corrida descarga FiveAM** con Quicklisp, así que necesita
 > internet una sola vez. Es la única dependencia externa del proyecto y solo
 > se usa en pruebas: el sistema principal carga con SBCL y nada más (ADR-004).
->
-> **En Mac o Linux:** en `.claude/settings.json` cambiá la ruta a `sh.exe` por
-> `sh <script>`. Esa ruta apunta a Git for Windows.
+
 
 ---
 
@@ -181,15 +180,16 @@ docs/
 src/
   engine/        Motor genérico: hechos, matching, reglas, agenda, inferencia
   domain/        Dominio académico: carga, 25 reglas, explicaciones, estadísticas
-  cli/           Presentación y flujo de sesión
+  cli/           Preguntas, presentación y flujo de sesión
   package.lisp   Los tres paquetes
   main.lisp      Punto de entrada
 data/
   courses.lisp   Catálogo de 47 cursos
-  profiles/      Perfiles de estudiante
+  profiles/      Cinco perfiles de demostración (ver su README)
 tests/           Espejo de src/, un archivo por archivo
 expert-system.asd  Definición ASDF de los dos sistemas
-run.lisp           sbcl --script run.lisp → demostración completa
+run.lisp           Demostración con perfil fijo
+run-interactive.lisp  Sesión que pregunta el perfil por consola
 run-tests.lisp     sbcl --script run-tests.lisp → suite de pruebas
 quicklisp.lisp     Instalador de Quicklisp. No es código del proyecto.
 ```
@@ -221,13 +221,11 @@ imperativo: `add forward-chaining agenda`.
 
 ## Qué falta
 
-### Tareas (3 de 14)
+### Tareas
 
-| Tarea | Qué falta |
-| ----- | --------- |
-| **T012** | Captura interactiva del perfil. Hoy la sesión carga un perfil fijo desde `data/profiles/`, no pregunta por consola. |
-| **T013** | Perfiles de demostración. Solo existe uno; faltan primer ingreso, estudiante avanzado, horario restringido y tolerancia baja. |
-| **T014** | Suite de aceptación en un archivo dedicado. Los 10 criterios ya están cubiertos de forma dispersa por las 235 comprobaciones. |
+Ninguna: las 14 están verificadas. El sistema pregunta el perfil por consola,
+recomienda, explica cada recomendación y entrega ambas familias de
+estadísticas.
 
 ### Decisiones
 

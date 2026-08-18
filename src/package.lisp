@@ -46,6 +46,14 @@
            #:circular-prerequisites
            #:load-catalog
            #:load-profile
+           #:assert-profile
+           #:run-session-with-profile
+           #:infer-session
+           #:catalog-course-ids
+           #:catalog-areas
+           #:catalog-days
+           #:catalog-slots
+           #:course-name-for
            #:profile-approved
            #:profile-interests
            #:profile-target-area
@@ -88,4 +96,5 @@
 (defpackage #:expert-system.cli
   (:use #:common-lisp)
   (:nicknames #:cli)
-  (:export #:start))
+  (:export #:start
+           #:start-interactive))

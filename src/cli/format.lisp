@@ -184,3 +184,30 @@
       ((string= name "CREDIT-LIMIT-EXCEEDED") "No cabe dentro de tu tope de creditos, dado el orden de prioridad.")
       ((string= name "ELECTIVE-GROUP-LIMIT") "Ya hay otra electiva mejor puntuada de este mismo bloque; solo se puede llevar una.")
       (t (string-downcase name)))))
+
+(defun print-course-explanation (session course-id stream)
+  "Explica un curso puntual: si fue recomendado, con que razones y con que
+   puntaje; si fue descartado, con cual de las seis razones. Si no aparece
+   en ninguna de las dos listas, lo dice en vez de callar."
+  (let ((recommendation (find course-id (domain:session-recommendations session)
+                              :key #'domain:recommendation-course-id :test #'equal))
+        (excluded (find course-id (domain:session-excluded session)
+                        :key #'domain:excluded-course-id :test #'equal)))
+    (format stream "~%")
+    (cond
+      (recommendation
+       (format stream "~a — RECOMENDADO (puntaje ~a)~%"
+               (domain:recommendation-course-name recommendation)
+               (domain:recommendation-score recommendation))
+       (dolist (reason (domain:recommendation-reasons recommendation))
+         (print-wrapped stream "  - " reason))
+       (dolist (warning (domain:recommendation-warnings recommendation))
+         (print-wrapped stream "  ! " warning)))
+      (excluded
+       (format stream "~a — DESCARTADO~%" (domain:excluded-course-name excluded))
+       (print-wrapped stream "  Motivo: " (describe-reason (domain:excluded-reason excluded))))
+      (t
+       (print-wrapped stream "  "
+                      (format nil "No encontre el curso ~a entre los recomendados ni entre los descartados. Revisa el codigo."
+                              course-id))))
+    (format stream "~%")))

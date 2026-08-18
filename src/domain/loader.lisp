@@ -48,10 +48,18 @@
 
 (defun load-profile (wm path)
   "Lee un perfil de estudiante desde PATH y afirma sus hechos en WM.
-   Retorna WM. Un curso aprobado que no existe en el catalogo (ya cargado
-   en WM) se advierte y se ignora; no aborta la carga (caso borde del PRD)."
-  (let* ((plist (read-sexp-file path))
-         (known-ids (mapcar #'second (engine:query-facts wm 'course))))
+   Delega en ASSERT-PROFILE: leer el archivo y afirmar los hechos son dos
+   cosas distintas, y la CLI interactiva necesita la segunda sin la
+   primera (arma la property list preguntando por consola, sin archivo)."
+  (assert-profile wm (read-sexp-file path)))
+
+(defun assert-profile (wm plist)
+  "Afirma en WM los hechos de perfil de PLIST, una property list con las
+   claves :approved, :interests, :target-area, :available,
+   :difficulty-tolerance y :credit-limit. Retorna WM. Un curso aprobado
+   que no existe en el catalogo (ya cargado en WM) se advierte y se
+   ignora; no aborta la carga (caso borde del PRD)."
+  (let* ((known-ids (mapcar #'second (engine:query-facts wm 'course))))
     (dolist (id (getf plist :approved))
       (if (member id known-ids :test #'equal)
           (engine:assert-fact (list 'approved id) wm)
@@ -230,3 +238,41 @@
       (engine:assert-fact (list 'prerequisite id req) wm))
     (dolist (block (getf props :schedule))
       (engine:assert-fact (list* 'schedule id block) wm))))
+
+;;; --- Consultas de catalogo para la CLI ------------------------------------
+;;;
+;;; La capa de presentacion necesita saber que es valido antes de preguntar
+;;; (que codigos existen, que areas hay, que bloques de horario). Se expone
+;;; aqui en vez de dejar que la CLI consulte hechos del dominio con
+;;; DOMAIN::, que romperia la separacion de capas.
+
+(defun catalog-course-ids (wm)
+  "Codigos de todos los cursos del catalogo, ordenados."
+  (sort (mapcar #'second (engine:query-facts wm 'course)) #'string<))
+
+(defun catalog-areas (wm)
+  "Areas profesionales presentes en el catalogo, ordenadas alfabeticamente."
+  (sort (remove-duplicates (mapcar #'third (engine:query-facts wm 'area)))
+        #'string< :key #'symbol-name))
+
+(defun catalog-days (wm)
+  "Dias en que hay clases en el catalogo, en orden de la semana."
+  (let ((week '(monday tuesday wednesday thursday friday saturday))
+        (present (remove-duplicates (mapcar #'third (engine:query-facts wm 'schedule)))))
+    (remove-if-not (lambda (day) (member day present)) week)))
+
+(defun catalog-slots (wm)
+  "Franjas horarias en uso en el catalogo, en orden natural del dia."
+  (let ((order '(morning afternoon evening))
+        (present (remove-duplicates (mapcar #'fourth (engine:query-facts wm 'schedule)))))
+    (remove-if-not (lambda (slot) (member slot present)) order)))
+
+(defun course-name-for (wm course-id)
+  "Nombre legible de COURSE-ID, o el propio codigo si no tiene nombre.
+
+   No delega en COURSE-NAME-OF de stats.lisp a proposito: ese archivo se
+   carga despues que este y la referencia adelantada solo serviria para
+   ganarse una advertencia de compilacion."
+  (or (third (find course-id (engine:query-facts wm 'course-name)
+                   :key #'second :test #'equal))
+      course-id))

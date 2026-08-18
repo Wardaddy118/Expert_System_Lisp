@@ -1,12 +1,11 @@
 # Plan de Implementación: Sistema Experto de Recomendaciones Académicas
 
-> **Status:** En ejecución — Fases 1 a 3 y parte de la Fase 4 verificadas
+> **Status:** Completo — las 5 fases y las 14 tareas verificadas
 > **Creado:** 2026-08-05
-> **Última actualización:** 2026-08-05 (implementación de la primera
-> versión funcional en `feature/initial-lisp-implementation`)
+> **Última actualización:** 2026-08-06 (cola completa: 14 de 14 tareas)
 > **Autor:** Architect (rol ACE); implementación por rol Developer
 > **PRD:** `docs/requirements/PRD-recomendador-academico.md`
-> **Cola de tareas:** `docs/progress/tasks.json` (11 de 14 verificadas)
+> **Cola de tareas:** `docs/progress/tasks.json` (14 de 14 verificadas)
 > **Línea base:** commit `9df7cf3` en `origin/main`
 > **Estado detallado y decisiones tomadas durante la implementación:**
 > `docs/context/ACTIVE_CONTEXT.md`
@@ -36,8 +35,10 @@ tener matching confiable es la forma más común de arruinar este proyecto.
 - [x] Carrera y universidad a modelar confirmadas: Bachillerato en
       Ingeniería en Sistemas de Computación, Universidad Fidélitas
       (catálogo real de 47 cursos en `data/courses.lisp`)
-- [ ] Fechas del calendario académico confirmadas
-- [ ] Reparto de tareas entre el equipo
+- [x] Fechas del calendario académico confirmadas: borrador 2026-08-06,
+      entrega final 2026-08-20
+- [x] Reparto de tareas: la cola se completó antes de que hiciera falta
+      repartirla
 
 ---
 
@@ -146,9 +147,9 @@ implementación.
 | 13 | 2026-08-05 | Base de conocimiento y recomendaciones correctas (Fase 3) | ✅ Hecho |
 | 13 | 2026-08-05 | Explicaciones desde la traza | ✅ Hecho |
 | 13 | 2026-08-06 | Estadísticas de estudiante y de catálogo (T010, T011) | ✅ Hecho |
-| **13** | **2026-08-06 (jueves)** | **ENTREGA DEL BORRADOR** | ⏳ Hoy |
-| 14 | 2026-08-13 | CLI interactiva (T012) y perfiles de demostración (T013) | ⬜ Pendiente |
-| **15** | **2026-08-20 (jueves)** | **ENTREGA FINAL: sistema 100% funcional** (T014) | ⬜ Pendiente |
+| **13** | **2026-08-06 (jueves)** | **ENTREGA DEL BORRADOR** | ✅ Listo |
+| 14 | 2026-08-13 | CLI interactiva (T012) y perfiles de demostración (T013) | ✅ Adelantado al 06-08 |
+| **15** | **2026-08-20 (jueves)** | **ENTREGA FINAL: sistema 100% funcional** (T014) | ✅ Código listo; queda el informe IEEE |
 
 > La fecha de la semana 15 se interpretó como el jueves 20 de agosto, dos
 > semanas después del borrador. Si el profesor se refería al jueves 13,
@@ -156,28 +157,28 @@ implementación.
 
 ### Qué queda para la entrega final
 
-Dos semanas para tres tareas, con el sistema ya funcionando de punta a punta:
+**Nada de código.** Las 14 tareas están verificadas y los 10 criterios de
+aceptación tienen prueba automatizada (`tests/acceptance-tests.lisp`). Lo que
+queda es ajeno al repositorio:
 
-- **T012** captura interactiva del perfil. Hoy la sesión carga un perfil fijo.
-- **T013** perfiles de demostración, con el criterio de cierre de la decisión
-  D-09 (ejercitar las tres reglas que nunca disparan, o eliminarlas).
-- **T014** suite de aceptación formalizada.
+- El informe en **formato IEEE** que exige el profesor.
+- Los datos oficiales (créditos, prerrequisitos, horarios), si el equipo los
+  consigue. Por decisión D-10 no bloquean: llegan como cambio en `data/` y
+  cero líneas de código.
 
-Nada de esto es riesgo de cronograma: el motor, el dominio y las estadísticas
-—que era lo difícil— ya están verificados.
+### Qué se entregó en el borrador
 
-### Qué mostrar en el borrador
+El borrador pedía avance, plan, documentación y código fuente. Se entregó el
+sistema completo, no un avance parcial:
 
-El borrador pide avance, plan, documentación y código fuente. Con lo que hay
-al terminar la Fase 1 y parte de la Fase 2 se cubre:
-
-- **Plan y diseño:** este documento, el PRD y los tres ADR.
-- **Documentación:** la base de conocimiento (glosario, entidades, reglas) —
-  que además es el contenido experto del sistema, no relleno.
-- **Código fuente:** esqueleto ASDF, catálogo cargable y el motor hasta donde
-  llegue, con su suite de pruebas pasando.
-- **Proceso:** el gate `verify.sh` en verde y la cola `tasks.json` mostrando
-  qué está hecho y qué falta. Esto último distingue el trabajo de un montón de
+- **Plan y diseño:** este documento, el PRD y los tres ADR del proyecto.
+- **Documentación:** la base de conocimiento (glosario, entidades, 21 reglas
+  de negocio) — que además es el contenido experto del sistema, no relleno.
+- **Código fuente:** motor de inferencia propio, dominio, CLI interactiva,
+  catálogo real de 47 cursos y cinco perfiles de demostración.
+- **Proceso:** el gate `verify.sh` en verde, 344 comprobaciones y la cola
+  `tasks.json` con las 14 tareas verificadas, cada una con su registro en
+  `docs/progress/`. Eso es lo que distingue el trabajo de un montón de
   archivos sueltos.
 
 ---
@@ -188,9 +189,9 @@ al terminar la Fase 1 y parte de la Fase 2 se cubre:
 | -------- | ------ |
 | Documentación de diseño | Completa y publicada (`9df7cf3`) |
 | Código de implementación | Primera versión funcional, rama `feature/initial-lisp-implementation` |
-| Cola de tareas | 11 de 14 verificadas (T001–T011); T012–T014 pendientes |
+| Cola de tareas | 14 de 14 verificadas; cola completa |
 | Gate de verificación | En verde: compila el sistema con ASDF y corre la suite completa |
-| Suite de pruebas | 235 comprobaciones, 0 fallos (`sbcl --script run-tests.lisp`) |
+| Suite de pruebas | 344 comprobaciones, 0 fallos (`sbcl --script run-tests.lisp`) |
 | Catálogo de datos | 47 cursos reales (Fidélitas); ver `docs/context/ACTIVE_CONTEXT.md` para qué campos son oficiales y cuáles provisionales |
 
 El gate compila con éxito desde que existe código real (Fase 1). Sigue
@@ -237,12 +238,12 @@ terminada hasta que el gate imprime `VERIFY_RESULT=pass`.
 | 9 | Ambas familias de estadísticas presentes | Pruebas de `stats.lisp` |
 | 10 | Sesión completa en menos de 2 s | Medición en la demostración |
 
-**Estado 2026-08-05:** 1–8 verificados por la suite actual (182 pruebas,
-`sbcl --script run-tests.lisp`). El criterio 9 solo parcialmente: existen
-estadísticas del estudiante (T010), no del catálogo (T011, pendiente). El
-criterio 10 no se ha medido formalmente; la demostración con 47 cursos y 25
-reglas corre en menos de un segundo en desarrollo, pero no hay una prueba
-que lo verifique.
+**Estado 2026-08-06: los diez verificados**, cada uno con su prueba en
+`tests/acceptance-tests.lisp` (`acceptance-1-...` a `acceptance-10-...`). Los
+dos que faltaban se cerraron con T011 y T014: el criterio 9 ya cubre ambas
+familias de estadísticas, y el 10 se cronometra contra NFR-001 en vez de
+afirmarse de palabra.
+
 
 ---
 

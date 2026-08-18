@@ -12,3 +12,9 @@
    prueba (data/), e imprime el informe en la salida estandar. Es lo que
    invoca run.lisp con sbcl --script."
   (expert-system.cli:start))
+
+(defun main-interactive ()
+  "Corre la sesion interactiva: pregunta el perfil por consola, presenta el
+   informe y deja consultar cursos puntuales. Es lo que invoca
+   run-interactive.lisp con sbcl --script."
+  (expert-system.cli:start-interactive))
