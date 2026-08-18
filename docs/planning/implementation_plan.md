@@ -176,7 +176,7 @@ sistema completo, no un avance parcial:
   de negocio) — que además es el contenido experto del sistema, no relleno.
 - **Código fuente:** motor de inferencia propio, dominio, CLI interactiva,
   catálogo real de 47 cursos y cinco perfiles de demostración.
-- **Proceso:** el gate `verify.sh` en verde, 344 comprobaciones y la cola
+- **Proceso:** el gate `verify.sh` en verde, 358 comprobaciones y la cola
   `tasks.json` con las 14 tareas verificadas, cada una con su registro en
   `docs/progress/`. Eso es lo que distingue el trabajo de un montón de
   archivos sueltos.
@@ -191,7 +191,7 @@ sistema completo, no un avance parcial:
 | Código de implementación | Primera versión funcional, rama `feature/initial-lisp-implementation` |
 | Cola de tareas | 14 de 14 verificadas; cola completa |
 | Gate de verificación | En verde: compila el sistema con ASDF y corre la suite completa |
-| Suite de pruebas | 344 comprobaciones, 0 fallos (`sbcl --script run-tests.lisp`) |
+| Suite de pruebas | 358 comprobaciones, 0 fallos (`sbcl --script run-tests.lisp`) |
 | Catálogo de datos | 47 cursos reales (Fidélitas); ver `docs/context/ACTIVE_CONTEXT.md` para qué campos son oficiales y cuáles provisionales |
 
 El gate compila con éxito desde que existe código real (Fase 1). Sigue

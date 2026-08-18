@@ -14,7 +14,7 @@
 git checkout main && git pull        # todo esta fusionado en main
 sbcl --script run.lisp               # demostracion con perfil fijo
 sbcl --script run-interactive.lisp   # sesion que pregunta el perfil
-sbcl --script run-tests.lisp         # suite completa (344 comprobaciones)
+sbcl --script run-tests.lisp         # suite completa (358 comprobaciones)
 ```
 
 Si cualquiera de los dos scripts falla, **no continuar**: hay una regresión
@@ -43,7 +43,7 @@ de la universidad, que por decisión D-10 no bloquean.
   `tests/acceptance-tests.lisp`.
 - **Gate de verificación:** en verde y ya verifica comportamiento, no solo
   compilación. `sh .ace/scripts/verify.sh` compila el sistema con ASDF (en
-  orden de dependencias) y corre las 344 comprobaciones de la suite.
+  orden de dependencias) y corre las 358 comprobaciones de la suite.
 
 ### Dos defectos de verificación corregidos (2026-08-05, sesión de revisión)
 
@@ -309,7 +309,7 @@ de prerrequisitos.
 - **D-05 a D-10** ratificadas.
 - Dos defectos de verificación: la suite pasaba mientras `run.lisp` reventaba
   (nada renderizaba el informe) y tres líneas excedían las 80 columnas.
-- Suite: 182 → 344 comprobaciones.
+- Suite: 182 → 358 comprobaciones.
 
 ## Archivos principales para retomar el trabajo
 

@@ -19,7 +19,7 @@ justifica la recomendación.
 | Código de implementación | ✅ Funcional y fusionado en `main` |
 | Cola de tareas | **14 de 14 verificadas** — cola completa |
 | Catálogo de datos | 47 cursos reales (Bachillerato en Ingeniería en Sistemas de Computación, Fidélitas); créditos, dificultad, horario y prerrequisitos son provisionales y están marcados como tales |
-| Suite de pruebas | **344 comprobaciones, 0 fallos** (`sbcl --script run-tests.lisp`) |
+| Suite de pruebas | **358 comprobaciones, 0 fallos** (`sbcl --script run-tests.lisp`) |
 | Gate de verificación | 🟢 En verde (`sh .ace/scripts/verify.sh` compila con ASDF y corre la suite) |
 
 ### Entregas
@@ -51,10 +51,13 @@ cd Expert_System_Lisp
 sh .ace/scripts/verify.sh      # debe decir VERIFY_RESULT=pass
 sbcl --script run.lisp         # demostracion con perfil fijo
 sbcl --script run-interactive.lisp  # sesion que pregunta tu perfil
-sbcl --script run-tests.lisp   # corre la suite (344 comprobaciones)
+sbcl --script run-tests.lisp   # corre la suite (358 comprobaciones)
 ```
 
 Todo está en `main`: no hace falta cambiar de rama.
+
+Guía detallada de ejecución, demostración y solución de problemas:
+**[COMO-EJECUTAR.md](COMO-EJECUTAR.md)**.
 
 > **La primera corrida descarga FiveAM** con Quicklisp, así que necesita
 > internet una sola vez. Es la única dependencia externa del proyecto y solo

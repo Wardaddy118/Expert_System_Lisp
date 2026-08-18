@@ -77,6 +77,10 @@
            #:statistics
            #:stats-evaluated
            #:stats-approved
+           #:stats-approved-credits
+           #:stats-total-credits
+           #:stats-career-progress
+           #:stats-approved-by-area
            #:stats-blocked-by-prerequisites
            #:stats-schedule-incompatible
            #:stats-too-difficult

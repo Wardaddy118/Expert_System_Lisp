@@ -10,6 +10,10 @@
 (defstruct stats
   evaluated
   approved
+  approved-credits
+  total-credits
+  career-progress
+  approved-by-area
   blocked-by-prerequisites
   schedule-incompatible
   too-difficult
@@ -26,6 +30,10 @@
     (make-stats
      :evaluated (length courses)
      :approved (length (engine:query-facts wm 'approved))
+     :approved-credits (approved-credits wm)
+     :total-credits (total-credits wm)
+     :career-progress (career-progress wm)
+     :approved-by-area (approved-by-area wm)
      :blocked-by-prerequisites (count-excluded-by-reason wm 'missing-prerequisites)
      :schedule-incompatible (count-excluded-by-reason wm 'schedule-conflict)
      :too-difficult (count-excluded-by-reason wm 'too-difficult)
@@ -34,6 +42,53 @@
      :recommended-credits (reduce #'+ (mapcar #'recommendation-credits
                                                (session-recommendations session))
                                    :initial-value 0))))
+
+(defun course-credits (wm course-id)
+  (or (third (find course-id (engine:query-facts wm 'credits)
+                   :key #'second :test #'equal))
+      0))
+
+(defun approved-credits (wm)
+  "Suma de creditos de los cursos aprobados por el estudiante (FR-040)."
+  (reduce #'+ (mapcar (lambda (f) (course-credits wm (second f)))
+                      (engine:query-facts wm 'approved))
+          :initial-value 0))
+
+(defun total-credits (wm)
+  "Suma de creditos de todo el catalogo cargado (FR-040)."
+  (reduce #'+ (mapcar (lambda (f) (course-credits wm (second f)))
+                      (engine:query-facts wm 'course))
+          :initial-value 0))
+
+(defun career-progress (wm)
+  "Implementa BR-031: creditos aprobados sobre creditos totales del catalogo.
+
+   Es avance RELATIVO AL CATALOGO MODELADO, no al plan de estudios real: el
+   catalogo es un subconjunto (decision D-03). Quien presente este numero
+   tiene que decirlo, y por eso la capa de presentacion lo acompana siempre
+   de esa aclaracion. Con catalogo vacio retorna 0 en vez de dividir entre
+   cero."
+  (let ((total (total-credits wm)))
+    (if (zerop total)
+        0
+        (/ (approved-credits wm) total))))
+
+(defun approved-by-area (wm)
+  "Distribucion de los cursos aprobados por area profesional (FR-040):
+   lista de (area cantidad creditos), ordenada alfabeticamente por area para
+   que no dependa del orden de la tabla hash."
+  (let ((by-area (make-hash-table :test #'eq)))
+    (dolist (fact (engine:query-facts wm 'approved))
+      (let ((area (third (find (second fact) (engine:query-facts wm 'area)
+                               :key #'second :test #'equal))))
+        (when area
+          (push (second fact) (gethash area by-area)))))
+    (sort (loop for area being the hash-keys of by-area using (hash-value ids)
+                collect (list area
+                              (length ids)
+                              (reduce #'+ (mapcar (lambda (id) (course-credits wm id)) ids)
+                                      :initial-value 0)))
+          #'string< :key (lambda (row) (symbol-name (first row))))))
 
 (defun distinct-second (facts)
   (remove-duplicates (mapcar #'second facts) :test #'equal))

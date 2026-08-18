@@ -107,3 +107,50 @@
     (is (= (length rows) (length (domain:session-recommendations session))))
     (dolist (row rows)
       (is (= 1 (third row))))))
+
+;;; --- Avance de carrera y distribucion por area (FR-040, BR-031) -------------
+
+(test approved-credits-never-exceed-the-catalog-total
+  (let* ((session (domain:run-session "data/courses.lisp" "data/profiles/advanced.lisp"))
+         (stats (domain:statistics session)))
+    (is (<= (domain:stats-approved-credits stats) (domain:stats-total-credits stats)))
+    (is (plusp (domain:stats-total-credits stats)))))
+
+(test career-progress-is-approved-credits-over-total-credits
+  "BR-031 al pie de la letra."
+  (let* ((session (domain:run-session "data/courses.lisp" "data/profiles/advanced.lisp"))
+         (stats (domain:statistics session)))
+    (is (= (domain:stats-career-progress stats)
+           (/ (domain:stats-approved-credits stats)
+              (domain:stats-total-credits stats))))))
+
+(test career-progress-stays-between-zero-and-one
+  (dolist (path *demo-profiles*)
+    (let ((stats (domain:statistics (domain:run-session "data/courses.lisp" path))))
+      (is (<= 0 (domain:stats-career-progress stats) 1)))))
+
+(test a-first-year-student-has-zero-career-progress
+  (let ((stats (domain:statistics
+                (domain:run-session "data/courses.lisp" "data/profiles/first-year.lisp"))))
+    (is (zerop (domain:stats-career-progress stats)))
+    (is (zerop (domain:stats-approved-credits stats)))
+    (is (null (domain:stats-approved-by-area stats)))))
+
+(test an-advanced-student-has-more-progress-than-a-first-year-one
+  (let ((advanced (domain:statistics
+                   (domain:run-session "data/courses.lisp" "data/profiles/advanced.lisp")))
+        (first-year (domain:statistics
+                     (domain:run-session "data/courses.lisp" "data/profiles/first-year.lisp"))))
+    (is (> (domain:stats-career-progress advanced)
+           (domain:stats-career-progress first-year)))))
+
+(test the-area-distribution-accounts-for-every-approved-course-with-an-area
+  (let* ((session (domain:run-session "data/courses.lisp" "data/profiles/advanced.lisp"))
+         (stats (domain:statistics session))
+         (counted (reduce #'+ (mapcar #'second (domain:stats-approved-by-area stats))
+                          :initial-value 0)))
+    (is (= counted (domain:stats-approved stats)))))
+
+(test career-progress-is-zero-for-an-empty-catalog-instead-of-dividing-by-zero
+  (let ((wm (engine:make-working-memory)))
+    (is (zerop (domain::career-progress wm)))))

@@ -64,12 +64,30 @@
   (format stream "ESTADISTICAS~%~%")
   (format stream "- Cursos evaluados: ~a~%" (domain:stats-evaluated stats))
   (format stream "- Cursos ya aprobados: ~a~%" (domain:stats-approved stats))
+  (format stream "- Creditos aprobados: ~a de ~a~%"
+          (domain:stats-approved-credits stats) (domain:stats-total-credits stats))
+  (format stream "- Avance de carrera: ~,1f%~%"
+          (* 100 (float (domain:stats-career-progress stats))))
+  (print-wrapped stream "  "
+                 "Avance relativo al catalogo modelado (47 cursos), no al plan de estudios completo de la carrera.")
+  (print-approved-by-area (domain:stats-approved-by-area stats) stream)
   (format stream "- Bloqueados por prerrequisitos: ~a~%" (domain:stats-blocked-by-prerequisites stats))
   (format stream "- Incompatibles con el horario: ~a~%" (domain:stats-schedule-incompatible stats))
   (format stream "- Descartados por dificultad: ~a~%" (domain:stats-too-difficult stats))
   (format stream "- Cursos elegibles: ~a~%" (domain:stats-eligible stats))
   (format stream "- Dificultad promedio: ~,2f~%" (float (domain:stats-average-difficulty stats)))
   (format stream "- Creditos recomendados: ~a~%" (domain:stats-recommended-credits stats)))
+
+(defun print-approved-by-area (rows stream)
+  "Distribucion de los cursos aprobados por area profesional (FR-040)."
+  (if (null rows)
+      (format stream "- Distribucion por area: sin cursos aprobados todavia~%")
+      (progn
+        (format stream "- Distribucion de aprobados por area:~%")
+        (dolist (row rows)
+          (format stream "    ~20a ~a curso(s), ~a credito(s)~%"
+                  (string-downcase (symbol-name (first row)))
+                  (second row) (third row))))))
 
 (defun print-catalog-statistics (stats stream)
   "Metricas del catalogo y de la base de conocimiento (FR-041), a diferencia
