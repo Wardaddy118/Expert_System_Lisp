@@ -49,3 +49,6 @@ logs/
 credentials.json
 secrets.yaml
 docs/*.html
+
+# Vuelco temporal de reglas para generar el documento
+rules-dump.sexp

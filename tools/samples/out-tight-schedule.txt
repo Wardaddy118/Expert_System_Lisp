@@ -1,0 +1,629 @@
+This is SBCL 2.6.7, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+SISTEMA DE RECOMENDACIONES ACADEMICAS
+
+PERFIL ANALIZADO
+
+- Cursos aprobados: SC-315, SC-103, SC-115
+- Intereses: software-engineering
+- Horarios disponibles: thursday morning, tuesday morning
+- Tolerancia de dificultad: 4
+- Area profesional objetivo: software-engineering
+
+RECOMENDACIONES
+
+1. Diseno y Desarrollo de Sistemas
+   Codigo: SC-702
+   Puntuacion: 15
+   Dificultad: 4
+
+   Razones:
+   - Coincide con uno de tus intereses declarados (+5 puntos).
+   - Coincide con tu area profesional objetivo (+10 puntos).
+
+2. Calidad del Software
+   Codigo: SC-405
+   Puntuacion: 15
+   Dificultad: 3
+
+   Razones:
+   - Coincide con uno de tus intereses declarados (+5 puntos).
+   - Coincide con tu area profesional objetivo (+10 puntos).
+
+CURSOS DESCARTADOS
+
+- Programacion Basica
+  Motivo: Ya aprobaste este curso.
+- Introduccion a la Informatica
+  Motivo: Ya aprobaste este curso.
+- Matematicas Discretas
+  Motivo: Ya aprobaste este curso.
+- Fundamentos de Diseno de Base de Datos Relacionales
+  Motivo: Te faltan requisitos por aprobar.
+- Desarrollo de Aplicaciones Web y Patrones
+  Motivo: Te faltan requisitos por aprobar.
+- Fundamentos de Enrutamiento y Conmutacion
+  Motivo: Te faltan requisitos por aprobar.
+- Estructura de Datos
+  Motivo: Te faltan requisitos por aprobar.
+- Seguridad Informatica
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Servidores de Colaboracion
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Inteligencia de Negocios
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Desarrollo de Emprendedores y Liderazgo Empresarial
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Implantacion de Sistemas
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Computacion y Sociedad
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Paradigmas de Programacion
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Administracion de Servidores
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Big Data
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Diseno de Videojuegos
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Auditoria de Sistemas
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Programacion para Dispositivos Moviles
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Programacion Avanzada en Web
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Base de Datos NoSQL
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Estructura y Arquitectura de Videojuegos
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Sistemas Operativos Avanzados
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Contabilidad Basica
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Gobernanza y Gestion de Tecnologias de Informacion y Comunicaciones
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Analisis y Modelado de Requerimientos
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Data Warehouse y Base de Datos Multidimensionales
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Programacion Avanzada
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Administracion de Proyecto
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Lenguajes de Base de Datos
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Ambiente Web Cliente/Servidor
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Probabilidad y Estadistica Descriptiva
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Metodologia de la Investigacion y Comunicacion
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Diseno de Interfaz Grafica de Usuario
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Programacion Cliente/Servidor Concurrente
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Documentacion del Software
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Algebra Lineal
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Electronica Digital y Microprocesadores
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Principios de Redes y Comunicaciones
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Introduccion a la Programacion
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Calculo Diferencial e Integral I
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+- Introduccion al Calculo o Matematica Basica
+  Motivo: Su horario no calza con tu disponibilidad declarada.
+
+ESTADISTICAS
+
+- Cursos evaluados: 47
+- Cursos ya aprobados: 3
+- Creditos aprobados: 12 de 188
+- Avance de carrera: 6.4%
+  Avance relativo al catalogo modelado (47 cursos), no al plan de estudios
+  completo de la carrera.
+- Distribucion de aprobados por area:
+    general-education    1 curso(s), 4 credito(s)
+    mathematics          1 curso(s), 4 credito(s)
+    software-engineering 1 curso(s), 4 credito(s)
+- Bloqueados por prerrequisitos: 4
+- Incompatibles con el horario: 35
+- Descartados por dificultad: 0
+- Cursos elegibles: 5
+- Dificultad promedio: 3.77
+- Creditos recomendados: 8
+
+ESTADISTICAS DEL CATALOGO
+
+- Perfiles analizados: 1
+  Con un solo perfil, 'mas recomendados' aun no compara nada: la metrica cobra
+  sentido con varios perfiles.
+
+  Cursos mas recomendados:
+    SC-405     Calidad del Software             1 perfil(es)
+    SC-702     Diseno y Desarrollo de Sistemas  1 perfil(es)
+
+  Cursos cuello de botella (cuantos cursos desbloquean):
+    SC-304     Estructura de Datos              3 curso(s)
+    SC-115     Programacion Basica              1 curso(s)
+    SC-202     Introduccion a la Programacion   1 curso(s)
+    SC-315     Matematicas Discretas            1 curso(s)
+
+  Dificultad promedio por area:
+    cybersecurity        4.00  (2 curso(s))
+    data                 5.00  (3 curso(s))
+    databases            4.25  (4 curso(s))
+    general-education    3.00  (3 curso(s))
+    infrastructure       3.60  (5 curso(s))
+    management           3.80  (5 curso(s))
+    mathematics          2.40  (5 curso(s))
+    networks             3.50  (2 curso(s))
+    software-engineering 4.00  (18 curso(s))
+
+  Cobertura de reglas: 16 de 25 dispararon
+    Nunca dispararon (conocimiento muerto o datos que no lo ejercitan):
+      - bottleneck-exception-to-tolerance
+      - excluded-too-difficult
+      - priority-bottleneck
+      - priority-general-education
+      - priority-too-easy
+      - priority-unlocks-target-area
+      - recommended-via-bottleneck
+      - recommended-via-general-education
+      - recommended-via-unlock
+
+TRAZA DEL MOTOR
+
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 1)
+  Hecho generado: (schedule-block-unavailable SC-807)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 2)
+  Hecho generado: (schedule-block-unavailable SC-806)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 3)
+  Hecho generado: (schedule-block-unavailable SC-805)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 4)
+  Hecho generado: (schedule-block-unavailable AN-775)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 5)
+  Hecho generado: (schedule-block-unavailable SC-803)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 6)
+  Hecho generado: (schedule-block-unavailable SC-270)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 7)
+  Hecho generado: (schedule-block-unavailable SC-250)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 8)
+  Hecho generado: (schedule-block-unavailable SC-708)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 9)
+  Hecho generado: (schedule-block-unavailable SC-707)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 10)
+  Hecho generado: (schedule-block-unavailable SC-706)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 11)
+  Hecho generado: (schedule-block-unavailable SC-704)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 12)
+  Hecho generado: (schedule-block-unavailable SC-703)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 13)
+  Hecho generado: (schedule-block-unavailable SC-701)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 14)
+  Hecho generado: (schedule-block-unavailable SC-609)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 15)
+  Hecho generado: (schedule-block-unavailable SC-620)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 16)
+  Hecho generado: (schedule-block-unavailable SC-607)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 17)
+  Hecho generado: (schedule-block-unavailable AN-125)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 18)
+  Hecho generado: (schedule-block-unavailable SC-604)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 19)
+  Hecho generado: (schedule-block-unavailable SC-603)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 20)
+  Hecho generado: (schedule-block-unavailable SC-602)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 21)
+  Hecho generado: (schedule-block-unavailable SC-601)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 22)
+  Hecho generado: (schedule-block-unavailable SC-505)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 23)
+  Hecho generado: (schedule-block-unavailable SC-504)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 24)
+  Hecho generado: (schedule-block-unavailable SC-502)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 25)
+  Hecho generado: (schedule-block-unavailable I-240)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 26)
+  Hecho generado: (schedule-block-unavailable SC-404)
+- Regla aplicada: missing-prerequisite-detected (ciclo 27)
+  Hecho generado: (missing-prerequisite SC-404)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 28)
+  Hecho generado: (schedule-block-unavailable SC-403)
+- Regla aplicada: missing-prerequisite-detected (ciclo 29)
+  Hecho generado: (missing-prerequisite SC-403)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 30)
+  Hecho generado: (schedule-block-unavailable SC-402)
+- Regla aplicada: missing-prerequisite-detected (ciclo 31)
+  Hecho generado: (missing-prerequisite SC-402)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 32)
+  Hecho generado: (schedule-block-unavailable AN-100)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 33)
+  Hecho generado: (schedule-block-unavailable SC-305)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 34)
+  Hecho generado: (schedule-block-unavailable SC-304)
+- Regla aplicada: missing-prerequisite-detected (ciclo 35)
+  Hecho generado: (missing-prerequisite SC-304)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 36)
+  Hecho generado: (schedule-block-unavailable SC-303)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 37)
+  Hecho generado: (schedule-block-unavailable SC-302)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 38)
+  Hecho generado: (schedule-block-unavailable EM-220)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 39)
+  Hecho generado: (schedule-block-unavailable SC-205)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 40)
+  Hecho generado: (schedule-block-unavailable SC-204)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 41)
+  Hecho generado: (schedule-block-unavailable SC-202)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 42)
+  Hecho generado: (schedule-block-unavailable II-215N)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 43)
+  Hecho generado: (schedule-block-unavailable SC-103)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 44)
+  Hecho generado: (schedule-block-unavailable SC-115)
+- Regla aplicada: schedule-block-unavailable-detected (ciclo 45)
+  Hecho generado: (schedule-block-unavailable II-115)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 46)
+  Hecho generado: (prerequisites-satisfied SC-807)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 47)
+  Hecho generado: (prerequisites-satisfied SC-806)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 48)
+  Hecho generado: (prerequisites-satisfied SC-805)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 49)
+  Hecho generado: (prerequisites-satisfied AN-775)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 50)
+  Hecho generado: (prerequisites-satisfied SC-803)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 51)
+  Hecho generado: (prerequisites-satisfied SC-270)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 52)
+  Hecho generado: (prerequisites-satisfied SC-250)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 53)
+  Hecho generado: (prerequisites-satisfied SC-708)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 54)
+  Hecho generado: (prerequisites-satisfied SC-707)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 55)
+  Hecho generado: (prerequisites-satisfied SC-706)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 56)
+  Hecho generado: (prerequisites-satisfied AN-110)
+- Regla aplicada: schedule-fits-when-no-conflict (ciclo 57)
+  Hecho generado: (schedule-fits AN-110)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 58)
+  Hecho generado: (prerequisites-satisfied SC-704)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 59)
+  Hecho generado: (prerequisites-satisfied SC-703)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 60)
+  Hecho generado: (prerequisites-satisfied SC-702)
+- Regla aplicada: schedule-fits-when-no-conflict (ciclo 61)
+  Hecho generado: (schedule-fits SC-702)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 62)
+  Hecho generado: (prerequisites-satisfied SC-701)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 63)
+  Hecho generado: (prerequisites-satisfied SC-609)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 64)
+  Hecho generado: (prerequisites-satisfied SC-620)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 65)
+  Hecho generado: (prerequisites-satisfied SC-607)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 66)
+  Hecho generado: (prerequisites-satisfied AN-125)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 67)
+  Hecho generado: (prerequisites-satisfied SC-604)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 68)
+  Hecho generado: (prerequisites-satisfied SC-603)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 69)
+  Hecho generado: (prerequisites-satisfied SC-602)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 70)
+  Hecho generado: (prerequisites-satisfied SC-601)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 71)
+  Hecho generado: (prerequisites-satisfied SC-505)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 72)
+  Hecho generado: (prerequisites-satisfied SC-504)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 73)
+  Hecho generado: (prerequisites-satisfied SC-503)
+- Regla aplicada: schedule-fits-when-no-conflict (ciclo 74)
+  Hecho generado: (schedule-fits SC-503)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 75)
+  Hecho generado: (prerequisites-satisfied SC-502)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 76)
+  Hecho generado: (prerequisites-satisfied I-240)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 77)
+  Hecho generado: (prerequisites-satisfied SC-405)
+- Regla aplicada: schedule-fits-when-no-conflict (ciclo 78)
+  Hecho generado: (schedule-fits SC-405)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 79)
+  Hecho generado: (prerequisites-satisfied AN-100)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 80)
+  Hecho generado: (prerequisites-satisfied SC-305)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 81)
+  Hecho generado: (prerequisites-satisfied SC-303)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 82)
+  Hecho generado: (prerequisites-satisfied SC-302)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 83)
+  Hecho generado: (prerequisites-satisfied EM-220)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 84)
+  Hecho generado: (prerequisites-satisfied SC-205)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 85)
+  Hecho generado: (prerequisites-satisfied SC-204)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 86)
+  Hecho generado: (prerequisites-satisfied SC-203)
+- Regla aplicada: schedule-fits-when-no-conflict (ciclo 87)
+  Hecho generado: (schedule-fits SC-203)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 88)
+  Hecho generado: (prerequisites-satisfied SC-202)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 89)
+  Hecho generado: (prerequisites-satisfied II-215N)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 90)
+  Hecho generado: (prerequisites-satisfied SC-315)
+- Regla aplicada: schedule-fits-when-no-conflict (ciclo 91)
+  Hecho generado: (schedule-fits SC-315)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 92)
+  Hecho generado: (prerequisites-satisfied SC-103)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 93)
+  Hecho generado: (prerequisites-satisfied SC-115)
+- Regla aplicada: prerequisites-satisfied-when-none-missing (ciclo 94)
+  Hecho generado: (prerequisites-satisfied II-115)
+- Regla aplicada: eligible-when-prerequisites-and-schedule-ok (ciclo 95)
+  Hecho generado: (eligible SC-203)
+- Regla aplicada: eligible-when-prerequisites-and-schedule-ok (ciclo 96)
+  Hecho generado: (eligible SC-405)
+- Regla aplicada: eligible-when-prerequisites-and-schedule-ok (ciclo 97)
+  Hecho generado: (eligible SC-503)
+- Regla aplicada: eligible-when-prerequisites-and-schedule-ok (ciclo 98)
+  Hecho generado: (eligible SC-702)
+- Regla aplicada: eligible-when-prerequisites-and-schedule-ok (ciclo 99)
+  Hecho generado: (eligible AN-110)
+- Regla aplicada: within-tolerance-rule (ciclo 100)
+  Hecho generado: (within-tolerance SC-807)
+- Regla aplicada: within-tolerance-rule (ciclo 101)
+  Hecho generado: (within-tolerance SC-806)
+- Regla aplicada: within-tolerance-rule (ciclo 102)
+  Hecho generado: (within-tolerance AN-775)
+- Regla aplicada: within-tolerance-rule (ciclo 103)
+  Hecho generado: (within-tolerance SC-803)
+- Regla aplicada: within-tolerance-rule (ciclo 104)
+  Hecho generado: (within-tolerance SC-270)
+- Regla aplicada: within-tolerance-rule (ciclo 105)
+  Hecho generado: (within-tolerance SC-250)
+- Regla aplicada: within-tolerance-rule (ciclo 106)
+  Hecho generado: (within-tolerance AN-110)
+- Regla aplicada: within-tolerance-rule (ciclo 107)
+  Hecho generado: (within-tolerance SC-704)
+- Regla aplicada: within-tolerance-rule (ciclo 108)
+  Hecho generado: (within-tolerance SC-702)
+- Regla aplicada: within-tolerance-rule (ciclo 109)
+  Hecho generado: (within-tolerance SC-607)
+- Regla aplicada: within-tolerance-rule (ciclo 110)
+  Hecho generado: (within-tolerance AN-125)
+- Regla aplicada: within-tolerance-rule (ciclo 111)
+  Hecho generado: (within-tolerance SC-604)
+- Regla aplicada: within-tolerance-rule (ciclo 112)
+  Hecho generado: (within-tolerance SC-603)
+- Regla aplicada: within-tolerance-rule (ciclo 113)
+  Hecho generado: (within-tolerance SC-505)
+- Regla aplicada: within-tolerance-rule (ciclo 114)
+  Hecho generado: (within-tolerance SC-504)
+- Regla aplicada: within-tolerance-rule (ciclo 115)
+  Hecho generado: (within-tolerance SC-503)
+- Regla aplicada: within-tolerance-rule (ciclo 116)
+  Hecho generado: (within-tolerance SC-502)
+- Regla aplicada: within-tolerance-rule (ciclo 117)
+  Hecho generado: (within-tolerance I-240)
+- Regla aplicada: within-tolerance-rule (ciclo 118)
+  Hecho generado: (within-tolerance SC-405)
+- Regla aplicada: within-tolerance-rule (ciclo 119)
+  Hecho generado: (within-tolerance SC-404)
+- Regla aplicada: within-tolerance-rule (ciclo 120)
+  Hecho generado: (within-tolerance SC-403)
+- Regla aplicada: within-tolerance-rule (ciclo 121)
+  Hecho generado: (within-tolerance SC-402)
+- Regla aplicada: within-tolerance-rule (ciclo 122)
+  Hecho generado: (within-tolerance AN-100)
+- Regla aplicada: within-tolerance-rule (ciclo 123)
+  Hecho generado: (within-tolerance SC-305)
+- Regla aplicada: within-tolerance-rule (ciclo 124)
+  Hecho generado: (within-tolerance SC-304)
+- Regla aplicada: within-tolerance-rule (ciclo 125)
+  Hecho generado: (within-tolerance SC-303)
+- Regla aplicada: within-tolerance-rule (ciclo 126)
+  Hecho generado: (within-tolerance SC-302)
+- Regla aplicada: within-tolerance-rule (ciclo 127)
+  Hecho generado: (within-tolerance EM-220)
+- Regla aplicada: within-tolerance-rule (ciclo 128)
+  Hecho generado: (within-tolerance SC-205)
+- Regla aplicada: within-tolerance-rule (ciclo 129)
+  Hecho generado: (within-tolerance SC-204)
+- Regla aplicada: within-tolerance-rule (ciclo 130)
+  Hecho generado: (within-tolerance SC-203)
+- Regla aplicada: within-tolerance-rule (ciclo 131)
+  Hecho generado: (within-tolerance SC-202)
+- Regla aplicada: within-tolerance-rule (ciclo 132)
+  Hecho generado: (within-tolerance II-215N)
+- Regla aplicada: within-tolerance-rule (ciclo 133)
+  Hecho generado: (within-tolerance SC-315)
+- Regla aplicada: within-tolerance-rule (ciclo 134)
+  Hecho generado: (within-tolerance SC-103)
+- Regla aplicada: within-tolerance-rule (ciclo 135)
+  Hecho generado: (within-tolerance SC-115)
+- Regla aplicada: within-tolerance-rule (ciclo 136)
+  Hecho generado: (within-tolerance II-115)
+- Regla aplicada: area-match-rule (ciclo 137)
+  Hecho generado: (area-match SC-115)
+- Regla aplicada: area-match-rule (ciclo 138)
+  Hecho generado: (area-match SC-202)
+- Regla aplicada: area-match-rule (ciclo 139)
+  Hecho generado: (area-match SC-302)
+- Regla aplicada: area-match-rule (ciclo 140)
+  Hecho generado: (area-match SC-303)
+- Regla aplicada: area-match-rule (ciclo 141)
+  Hecho generado: (area-match SC-304)
+- Regla aplicada: area-match-rule (ciclo 142)
+  Hecho generado: (area-match SC-305)
+- Regla aplicada: area-match-rule (ciclo 143)
+  Hecho generado: (area-match SC-403)
+- Regla aplicada: area-match-rule (ciclo 144)
+  Hecho generado: (area-match SC-405)
+- Regla aplicada: area-match-rule (ciclo 145)
+  Hecho generado: (area-match SC-502)
+- Regla aplicada: area-match-rule (ciclo 146)
+  Hecho generado: (area-match SC-601)
+- Regla aplicada: area-match-rule (ciclo 147)
+  Hecho generado: (area-match SC-603)
+- Regla aplicada: area-match-rule (ciclo 148)
+  Hecho generado: (area-match SC-620)
+- Regla aplicada: area-match-rule (ciclo 149)
+  Hecho generado: (area-match SC-701)
+- Regla aplicada: area-match-rule (ciclo 150)
+  Hecho generado: (area-match SC-702)
+- Regla aplicada: area-match-rule (ciclo 151)
+  Hecho generado: (area-match SC-703)
+- Regla aplicada: area-match-rule (ciclo 152)
+  Hecho generado: (area-match SC-706)
+- Regla aplicada: area-match-rule (ciclo 153)
+  Hecho generado: (area-match SC-250)
+- Regla aplicada: area-match-rule (ciclo 154)
+  Hecho generado: (area-match SC-803)
+- Regla aplicada: interest-match-rule (ciclo 155)
+  Hecho generado: (interest-match SC-115)
+- Regla aplicada: interest-match-rule (ciclo 156)
+  Hecho generado: (interest-match SC-202)
+- Regla aplicada: interest-match-rule (ciclo 157)
+  Hecho generado: (interest-match SC-302)
+- Regla aplicada: interest-match-rule (ciclo 158)
+  Hecho generado: (interest-match SC-303)
+- Regla aplicada: interest-match-rule (ciclo 159)
+  Hecho generado: (interest-match SC-304)
+- Regla aplicada: interest-match-rule (ciclo 160)
+  Hecho generado: (interest-match SC-305)
+- Regla aplicada: interest-match-rule (ciclo 161)
+  Hecho generado: (interest-match SC-403)
+- Regla aplicada: interest-match-rule (ciclo 162)
+  Hecho generado: (interest-match SC-405)
+- Regla aplicada: interest-match-rule (ciclo 163)
+  Hecho generado: (interest-match SC-502)
+- Regla aplicada: interest-match-rule (ciclo 164)
+  Hecho generado: (interest-match SC-601)
+- Regla aplicada: interest-match-rule (ciclo 165)
+  Hecho generado: (interest-match SC-603)
+- Regla aplicada: interest-match-rule (ciclo 166)
+  Hecho generado: (interest-match SC-620)
+- Regla aplicada: interest-match-rule (ciclo 167)
+  Hecho generado: (interest-match SC-701)
+- Regla aplicada: interest-match-rule (ciclo 168)
+  Hecho generado: (interest-match SC-702)
+- Regla aplicada: interest-match-rule (ciclo 169)
+  Hecho generado: (interest-match SC-703)
+- Regla aplicada: interest-match-rule (ciclo 170)
+  Hecho generado: (interest-match SC-706)
+- Regla aplicada: interest-match-rule (ciclo 171)
+  Hecho generado: (interest-match SC-250)
+- Regla aplicada: interest-match-rule (ciclo 172)
+  Hecho generado: (interest-match SC-803)
+- Regla aplicada: bottleneck-with-three-dependents (ciclo 173)
+  Hecho generado: (bottleneck SC-304 3)
+- Regla aplicada: priority-interest (ciclo 174)
+  Hecho generado: (priority SC-702 5)
+- Regla aplicada: priority-interest (ciclo 175)
+  Hecho generado: (priority SC-405 5)
+- Regla aplicada: priority-target-area (ciclo 176)
+  Hecho generado: (priority SC-702 10)
+- Regla aplicada: priority-target-area (ciclo 177)
+  Hecho generado: (priority SC-405 10)
+- Regla aplicada: recommended-via-interest (ciclo 178)
+  Hecho generado: (recommended SC-702)
+- Regla aplicada: recommended-via-interest (ciclo 179)
+  Hecho generado: (recommended SC-405)
+- Regla aplicada: recommended-via-target-area (ciclo 180)
+- Regla aplicada: recommended-via-target-area (ciclo 181)
+- Regla aplicada: excluded-schedule-conflict (ciclo 182)
+  Hecho generado: (excluded II-115 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 183)
+  Hecho generado: (excluded II-215N schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 184)
+  Hecho generado: (excluded SC-202 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 185)
+  Hecho generado: (excluded SC-204 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 186)
+  Hecho generado: (excluded SC-205 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 187)
+  Hecho generado: (excluded EM-220 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 188)
+  Hecho generado: (excluded SC-302 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 189)
+  Hecho generado: (excluded SC-303 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 190)
+  Hecho generado: (excluded SC-305 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 191)
+  Hecho generado: (excluded AN-100 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 192)
+  Hecho generado: (excluded I-240 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 193)
+  Hecho generado: (excluded SC-502 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 194)
+  Hecho generado: (excluded SC-504 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 195)
+  Hecho generado: (excluded SC-505 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 196)
+  Hecho generado: (excluded SC-601 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 197)
+  Hecho generado: (excluded SC-602 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 198)
+  Hecho generado: (excluded SC-603 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 199)
+  Hecho generado: (excluded SC-604 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 200)
+  Hecho generado: (excluded AN-125 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 201)
+  Hecho generado: (excluded SC-607 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 202)
+  Hecho generado: (excluded SC-620 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 203)
+  Hecho generado: (excluded SC-609 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 204)
+  Hecho generado: (excluded SC-701 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 205)
+  Hecho generado: (excluded SC-703 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 206)
+  Hecho generado: (excluded SC-704 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 207)
+  Hecho generado: (excluded SC-706 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 208)
+  Hecho generado: (excluded SC-707 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 209)
+  Hecho generado: (excluded SC-708 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 210)
+  Hecho generado: (excluded SC-250 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 211)
+  Hecho generado: (excluded SC-270 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 212)
+  Hecho generado: (excluded SC-803 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 213)
+  Hecho generado: (excluded AN-775 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 214)
+  Hecho generado: (excluded SC-805 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 215)
+  Hecho generado: (excluded SC-806 schedule-conflict)
+- Regla aplicada: excluded-schedule-conflict (ciclo 216)
+  Hecho generado: (excluded SC-807 schedule-conflict)
+- Regla aplicada: excluded-missing-prerequisites (ciclo 217)
+  Hecho generado: (excluded SC-304 missing-prerequisites)
+- Regla aplicada: excluded-missing-prerequisites (ciclo 218)
+  Hecho generado: (excluded SC-402 missing-prerequisites)
+- Regla aplicada: excluded-missing-prerequisites (ciclo 219)
+  Hecho generado: (excluded SC-403 missing-prerequisites)
+- Regla aplicada: excluded-missing-prerequisites (ciclo 220)
+  Hecho generado: (excluded SC-404 missing-prerequisites)
+- Regla aplicada: excluded-already-approved (ciclo 221)
+  Hecho generado: (excluded SC-315 already-approved)
+- Regla aplicada: excluded-already-approved (ciclo 222)
+  Hecho generado: (excluded SC-103 already-approved)
+- Regla aplicada: excluded-already-approved (ciclo 223)
+  Hecho generado: (excluded SC-115 already-approved)
