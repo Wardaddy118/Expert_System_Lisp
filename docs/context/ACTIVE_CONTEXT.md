@@ -253,9 +253,40 @@ demostración, prerrequisitos, y el cálculo de cuello de botella que
 depende de esos prerrequisitos. Ver la tabla de arriba y la cabecera de
 `data/courses.lisp` para el detalle exacto de cada uno.
 
+## Defectos encontrados y corregidos
+
+Ninguno abierto. Se dejan registrados porque varios enseñan algo que conviene
+no volver a olvidar.
+
+| # | Defecto | Cómo se encontró | Commit |
+| - | ------- | ---------------- | ------ |
+| 1 | El gate compilaba archivo por archivo, en un proceso SBCL nuevo cada uno; todo fuente real fallaba en su `in-package`. Nunca sirvió para código Lisp de verdad | Al revisar la rama de implementación | `4c21666` |
+| 2 | La suite no corría en un clon limpio: `asdf:load-system` resuelve lo instalado pero no descarga FiveAM | El mismo repaso | `4c21666` |
+| 3 | Los `.sh` se habrían registrado con CRLF y al clonar fallarían con «bad interpreter» | Aviso de git al preparar el primer commit | `9df7cf3` |
+| 4 | Directiva `~-32a` inválida: `run.lisp` reventaba **mientras la suite estaba verde**, porque nada renderizaba el informe | Al correr la demo tras agregar T011 | `c52cc34` |
+| 5 | Tres líneas del informe pasaban de 80 columnas, contra FR-050 (dos ya venían de antes) | La prueba de ancho que se agregó junto al defecto 4 | `c52cc34` |
+| 6 | BR-008 vivía en el código sin especificación | Revisión de la rama | `c52cc34` |
+| 7 | FR-040 tenía una de cuatro métricas, y BR-031 estaba especificada sin implementar | Auditoría contra el enunciado del curso | `fe6f9e5` |
+| 8 | `course-credits` duplicada en `stats.lisp`, tapando la de `knowledge.lisp` | Advertencia de redefinición de SBCL | `0d61f3b` |
+| 9 | Una sesión tardaba 3,1 s contra el límite de 2 s de NFR-001: el matcher recorría los 681 hechos por cada binding-set, condición, regla y ciclo | La prueba del criterio de aceptación 10 | `0d61f3b` |
+
+### Lo que dejaron como lección
+
+- **Los defectos 4 y 9 los encontró una prueba nueva, no una revisión.** El 4
+  existía porque ninguna prueba tocaba la capa de presentación; el 9, porque
+  el criterio de rendimiento estaba escrito pero sin medir.
+- **El defecto 1 hacía que «verificado» no significara nada.** Diez tareas se
+  habían cerrado contra un gate que no verificaba.
+- **Los defectos 6 y 7 son el mismo error en direcciones opuestas:** una regla
+  sin especificación y una especificación sin regla. Por eso cada `defrule`
+  cita su BR.
+- **Del 9:** tres optimizaciones «obvias» no movieron la aguja antes de
+  perfilar. Medir primero.
+
+---
+
 ## Limitaciones conocidas
 
-- No existe captura interactiva del perfil por consola.
 - No hay créditos, prerrequisitos ni correquisitos oficiales.
 - No hay horarios reales.
 - La dificultad es una fórmula provisional del equipo, no un criterio
@@ -263,7 +294,7 @@ depende de esos prerrequisitos. Ver la tabla de arriba y la cabecera de
 - Las áreas profesionales y los intereses son clasificaciones del equipo,
   no de la universidad.
 - El catálogo cubre solo el Bachillerato, no las licenciaturas.
-- La traza completa de una corrida es extensa (295 líneas en la
+- La traza completa de una corrida es extensa (cerca de 300 disparos en la
   demostración actual); no hay todavía una vista resumida.
 - Algunas reglas que aparecen en la traza como "disparadas" no producen
   un hecho nuevo en ese ciclo porque el hecho ya estaba presente
