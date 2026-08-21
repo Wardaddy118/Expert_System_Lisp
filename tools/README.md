@@ -39,6 +39,7 @@ sí se versiona, porque es el entregable.
 | `build_doc.py` | Arma el HTML: diagramas SVG, las reglas volcadas y las salidas de ejemplo |
 | `accents.py` | Restaura tildes y eñes del texto visible |
 | `samples/` | Salidas reales de cada perfil, citadas literalmente en la sección 8 |
+| `build_guion.py` | Convierte `docs/GUION-PRESENTACION.md` a HTML para imprimir a PDF |
 
 ## Sobre `accents.py`
 
@@ -71,3 +72,16 @@ for p in first-year advanced tight-schedule low-tolerance; do
     > "tools/samples/out-$p.txt" 2>/dev/null
 done
 ```
+
+## El guion de presentación
+
+`docs/GUION-PRESENTACION.md` es la fuente editable; el PDF se genera de ahí:
+
+```bash
+python tools/build_guion.py
+"C:/Program Files/Google/Chrome/Application/chrome.exe"   --headless --disable-gpu --no-pdf-header-footer   --print-to-pdf="docs/GUION-PRESENTACION.pdf"   "file:///RUTA/ABSOLUTA/docs/GUION-PRESENTACION.html"
+```
+
+El conversor cubre solo el Markdown que usa el guion —títulos, tablas, listas,
+bloques de código, citas y énfasis en línea— y no pretende ser general. Se
+editó el `.md`, se regenera el PDF: nunca al revés.

@@ -62,8 +62,9 @@ Guía detallada de ejecución, demostración y solución de problemas:
 Documento de diseño y arquitectura, con diagramas, las 25 reglas y los ejemplos:
 **[docs/DISENO-Y-ARQUITECTURA.pdf](docs/DISENO-Y-ARQUITECTURA.pdf)** (21 páginas).
 
-Guion para presentar el proyecto, alineado con ese documento:
-**[docs/GUION-PRESENTACION.md](docs/GUION-PRESENTACION.md)**.
+Guion para presentar el proyecto, con el paso a paso de la demostración:
+**[docs/GUION-PRESENTACION.pdf](docs/GUION-PRESENTACION.pdf)** (13 páginas;
+fuente editable en [.md](docs/GUION-PRESENTACION.md)).
 
 > **La primera corrida descarga FiveAM** con Quicklisp, así que necesita
 > internet una sola vez. Es la única dependencia externa del proyecto y solo
